@@ -13,10 +13,11 @@ from aca_tools.provenance import (
     validate_lineage_document,
     validate_partitions,
 )
+from aca_tools.paths import resolve_upstream_source_root
 
 
 PROJECT_ROOT = Path(__file__).parents[1]
-SOURCE_ROOT = Path("/var/www/projetos/awesome-claude-agents")
+SOURCE_ROOT = resolve_upstream_source_root(PROJECT_ROOT)
 
 
 @pytest.fixture(scope="module")

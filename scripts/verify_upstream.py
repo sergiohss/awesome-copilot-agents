@@ -13,6 +13,7 @@ from typing import Any
 
 from aca_tools.errors import ValidationError
 from aca_tools.provenance import SourceBaseline, load_baseline, verify_lineages, verify_upstream
+from aca_tools.paths import resolve_upstream_source_root
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -125,7 +126,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Verify the immutable Awesome Claude Agents source authority."
     )
-    parser.add_argument("--source-root", required=True, type=Path)
+    parser.add_argument(
+        "--source-root",
+        type=Path,
+        default=None,
+        help="Pinned awesome-claude-agents checkout (default: ACA_SOURCE_ROOT or vendor/upstream)",
+    )
     parser.add_argument(
         "--distribution-root",
         type=Path,
@@ -137,12 +143,20 @@ def main() -> int:
     mode.add_argument("--baseline-only", action="store_true")
     arguments = parser.parse_args()
 
+    source_root = arguments.source_root
+    if source_root is None:
+        try:
+            source_root = resolve_upstream_source_root(ROOT)
+        except FileNotFoundError as error:
+            print(f"FAIL: {error}", file=sys.stderr)
+            return 1
+
     try:
         baseline = load_baseline(ROOT)
         if arguments.record_baseline:
-            _record_baseline(arguments.source_root, baseline)
+            _record_baseline(source_root, baseline)
             baseline = load_baseline(ROOT)
-        report = verify_upstream(arguments.source_root, baseline)
+        report = verify_upstream(source_root, baseline)
         if not arguments.baseline_only:
             lineage_issues = verify_lineages(arguments.distribution_root, baseline)
             if lineage_issues:

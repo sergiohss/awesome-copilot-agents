@@ -10,11 +10,12 @@ import subprocess
 import pytest
 
 from aca_tools.errors import ValidationError
+from aca_tools.paths import resolve_upstream_source_root
 from aca_tools.provenance import load_baseline, verify_upstream
 
 
 PROJECT_ROOT = Path(__file__).parents[1]
-SOURCE_ROOT = Path("/var/www/projetos/awesome-claude-agents")
+SOURCE_ROOT = resolve_upstream_source_root(PROJECT_ROOT)
 PINNED_COMMIT = "2050f3c60fcfea497f7b6b3ec6566cc316367a7e"
 LICENSE_SHA256 = "6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa"
 CLAUDE_SHA256 = "c2cc9e33425eedfe433d0699d0085e4548897fd33a33ca1cdf51b9b67990eeed"

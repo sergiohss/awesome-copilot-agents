@@ -2,11 +2,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from aca_tools.paths import resolve_upstream_source_root
 from aca_tools.release import validate_release
 
 
 PROJECT_ROOT = Path(__file__).parents[1]
-SOURCE_ROOT = Path("/var/www/projetos/awesome-claude-agents")
+SOURCE_ROOT = resolve_upstream_source_root(PROJECT_ROOT)
 
 
 def test_development_dimensions_include_catalog_and_provenance():

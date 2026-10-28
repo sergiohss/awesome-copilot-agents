@@ -7,11 +7,11 @@ from pathlib import Path
 import sys
 
 from aca_tools.errors import ValidationError
+from aca_tools.paths import resolve_upstream_source_root
 from aca_tools.release import validate_release
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SOURCE = Path("/var/www/projetos/awesome-claude-agents")
 
 
 def main() -> int:
@@ -19,12 +19,25 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--development", action="store_true")
     mode.add_argument("--release", action="store_true")
-    parser.add_argument("--source-root", type=Path, default=DEFAULT_SOURCE)
+    parser.add_argument(
+        "--source-root",
+        type=Path,
+        default=None,
+        help="Pinned awesome-claude-agents checkout (default: ACA_SOURCE_ROOT or vendor/upstream)",
+    )
     parser.add_argument("--root", type=Path, default=ROOT)
     arguments = parser.parse_args()
 
+    source_root = arguments.source_root
+    if source_root is None:
+        try:
+            source_root = resolve_upstream_source_root(arguments.root)
+        except FileNotFoundError as error:
+            print(json.dumps({"ok": False, "error": str(error)}), indent=2)
+            return 1
+
     try:
-        report = validate_release(arguments.root, source_root=arguments.source_root)
+        report = validate_release(arguments.root, source_root=source_root)
     except ValidationError as error:
         print(json.dumps({"ok": False, "error": str(error)}), indent=2)
         return 1
