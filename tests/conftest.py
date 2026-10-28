@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from copy import deepcopy
 from pathlib import Path
 import shutil
+import sys
 from typing import Any, Callable
 
 import pytest
@@ -11,6 +12,8 @@ import yaml
 
 
 PROJECT_ROOT = Path(__file__).parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 FIXTURE_ROOT = PROJECT_ROOT / "tests/fixtures/minimal"
 
 

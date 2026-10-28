@@ -3,6 +3,21 @@
   "complete": false,
   "files": [
     {
+      "path": ".github/agents/project-analyst.agent.md",
+      "sha256": "6cae82916141db43d3670c99d5bfbab342277bb69f144d16d5e3bd87e61d2548",
+      "size": 4593
+    },
+    {
+      "path": ".github/agents/team-configurator.agent.md",
+      "sha256": "ccbebdf1363576b444585f6f76cd9186c18f513b388bc3f182a2222be5290ea1",
+      "size": 4776
+    },
+    {
+      "path": ".github/agents/tech-lead-orchestrator.agent.md",
+      "sha256": "7b95d54a1e143b53ca897839bcd380f0587b28c9cbb5abacd270a8bf6ef9d840",
+      "size": 4998
+    },
+    {
       "path": ".github/copilot-instructions.md",
       "sha256": "d6b057234314e51bc6ccf5d99c5e2fc83f1255a6227c11b17afb7b9836f5c99e",
       "size": 2138

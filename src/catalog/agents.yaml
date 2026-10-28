@@ -1,1 +1,48 @@
-agents: []
+agents:
+  - id: tech-lead-orchestrator
+    description: Senior technical lead for complex multi-step work. Returns Route Plan v1 with exact specialist assignments, dependencies, concurrency groups, and approval checkpoints. Never implements bounded specialist slices directly.
+    tools: [read, search, agent]
+    tool_policy: T-O
+    approval_policy: AP-OC
+    risk_gates: []
+    surfaces: [H]
+    contract_id: route-plan-v1
+    procedure_ids: [PROC-00, PROC-03, PROC-04, PROC-05]
+    profile: src/profiles/tech-lead-orchestrator.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-orchestrated-complex.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: project-analyst
+    description: Inspects unfamiliar repositories and returns stack-analysis-v1 with evidence-backed stack, architecture, confidence, findings, contradictions, unknowns, and specialist recommendations.
+    tools: [read, search, execute]
+    tool_policy: T-RX
+    approval_policy: AP-R
+    risk_gates: []
+    surfaces: [P]
+    contract_id: stack-analysis-v1
+    procedure_ids: [PROC-01, PROC-02]
+    profile: src/profiles/project-analyst.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-review-only.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: team-configurator
+    description: Detects stack evidence and prepares bounded AI team configuration updates. Previews generated instruction blocks only and requires explicit approval before instruction or catalog mutation.
+    tools: [read, search, edit]
+    tool_policy: T-E
+    approval_policy: AP-X
+    risk_gates: []
+    surfaces: [H, C]
+    contract_id: team-configuration-v1
+    procedure_ids: [PROC-01, PROC-02, PROC-05, PROC-20]
+    profile: src/profiles/team-configurator.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-explicit-before-external-side-effect.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md

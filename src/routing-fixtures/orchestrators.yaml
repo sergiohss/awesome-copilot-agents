@@ -1,0 +1,183 @@
+fixtures:
+  - id: bounded-fastapi-implementation
+    kind: routing
+    request: Implement a bounded FastAPI endpoint with Pydantic models and tests.
+    expected_agent_id: fastapi-expert
+    excluded_alternatives:
+      - tech-lead-orchestrator
+      - backend-developer
+    approval_policy: AP-B
+    contract_id: fastapi-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+    manual_selection: false
+
+  - id: multi-stack-architecture
+    kind: routing
+    request: Plan a multi-stack modernization across FastAPI, Next.js, and shared CI/CD.
+    expected_agent_id: tech-lead-orchestrator
+    excluded_alternatives:
+      - fastapi-expert
+      - react-nextjs-expert
+    approval_policy: AP-OC
+    contract_id: route-plan-v1
+    surface_mode: cloud-separate-session
+    expected_status: needs-approval
+    manual_selection: false
+
+  - id: team-configurator-manual
+    kind: routing
+    request: Refresh the repository AI team configuration after a stack change.
+    expected_agent_id: team-configurator
+    excluded_alternatives:
+      - project-analyst
+    approval_policy: AP-X
+    contract_id: team-configuration-v1
+    surface_mode: ide-subagent
+    expected_status: needs-approval
+    manual_selection: true
+
+  - id: three-slice-route-plan
+    agent_id: tech-lead-orchestrator
+    handoff:
+      handoff_version: 1
+      contract_id: route-plan-v1
+      status: completed
+      summary: Three-slice modernization plan with bounded concurrency.
+      artifact_paths: []
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        request_summary: Modernize API, frontend, and quality gates
+        assumptions:
+          - Existing repository remains the source of truth
+        slices:
+          - agent_id: fastapi-expert
+            objective: Harden API contracts
+            inputs:
+              - pyproject.toml
+            contract_id: fastapi-implementation-v1
+            dependencies: []
+            artifact_paths: []
+          - agent_id: react-nextjs-expert
+            objective: Update App Router pages
+            inputs:
+              - package.json
+            contract_id: nextjs-implementation-v1
+            dependencies: []
+            artifact_paths: []
+          - agent_id: code-reviewer
+            objective: Review integrated changes
+            inputs:
+              - git diff
+            contract_id: code-review-v1
+            dependencies:
+              - fastapi-expert
+              - react-nextjs-expert
+            artifact_paths: []
+        concurrency_groups:
+          - - fastapi-expert
+            - react-nextjs-expert
+          - - code-reviewer
+        allowed_agent_whitelist:
+          - fastapi-expert
+          - react-nextjs-expert
+          - code-reviewer
+        excluded_alternatives:
+          - tech-lead-orchestrator
+        approval_checkpoint_state: approved
+        surface_execution_mode: ide-subagent
+        cloud_session_instructions: []
+        completion_gate: Review integrated API and frontend slices before merge
+        unresolved_prerequisites: []
+
+  - id: cloud-route-plan-orchestrator
+    agent_id: tech-lead-orchestrator
+    handoff:
+      handoff_version: 1
+      contract_id: route-plan-v1
+      status: completed
+      summary: Cloud route plan with separate sessions per slice.
+      artifact_paths: []
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        request_summary: Split backend and frontend modernization for cloud execution
+        assumptions:
+          - Each slice runs in a separately selected session
+        slices:
+          - agent_id: fastapi-expert
+            objective: Harden API layer
+            inputs:
+              - pyproject.toml
+            contract_id: fastapi-implementation-v1
+            dependencies: []
+            artifact_paths: []
+        concurrency_groups:
+          - - fastapi-expert
+        allowed_agent_whitelist:
+          - fastapi-expert
+        excluded_alternatives:
+          - tech-lead-orchestrator
+        approval_checkpoint_state: approved
+        surface_execution_mode: cloud-separate-session
+        cloud_session_instructions:
+          - agent_id: fastapi-expert
+            instructions: Continue API hardening in a new session
+            context_payload: handoff-artifacts/route-plan.json
+        completion_gate: Review hardened API before frontend work
+        unresolved_prerequisites: []
+
+  - id: project-analyst-stack-report
+    agent_id: project-analyst
+    handoff:
+      handoff_version: 1
+      contract_id: stack-analysis-v1
+      status: completed
+      summary: Detected Python and FastAPI from repository evidence.
+      artifact_paths: []
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        stack:
+          - Python
+          - FastAPI
+        architecture: service monolith
+        confidence: high
+        findings:
+          - summary: FastAPI declared in pyproject.toml
+            evidence: pyproject.toml
+        contradictions: []
+        unknowns: []
+        recommendations:
+          - fastapi-expert
+
+  - id: team-configurator-preview
+    agent_id: team-configurator
+    handoff:
+      handoff_version: 1
+      contract_id: team-configuration-v1
+      status: needs-approval
+      summary: Preview generated team configuration block for approval.
+      artifact_paths:
+        - docs/ai-team-configuration.preview.md
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites:
+          - explicit approval before instruction mutation
+      result:
+        stack:
+          - Python
+          - FastAPI
+        selected_agents:
+          - agent_id: fastapi-expert
+            reason: Exact FastAPI owner detected from dependencies
+          - agent_id: code-reviewer
+            reason: Required quality gate for every delivery

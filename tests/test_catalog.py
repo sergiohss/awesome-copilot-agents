@@ -118,10 +118,14 @@ def test_catalog_models_are_immutable(tmp_path: Path, minimal_catalog_tree):
         catalog.agents[0].id = "changed"  # type: ignore[misc]
 
 
-def test_repository_catalog_has_strict_task_one_skeleton():
+def test_repository_catalog_has_orchestrator_skeleton():
     root = Path(__file__).parents[1]
     catalog = load_catalog(root)
-    assert catalog.agents == ()
+    assert {agent.id for agent in catalog.agents} == {
+        "tech-lead-orchestrator",
+        "project-analyst",
+        "team-configurator",
+    }
     assert len(catalog.procedures) == 21
     assert [procedure.id for procedure in catalog.procedures] == [
         f"PROC-{index:02d}" for index in range(21)
