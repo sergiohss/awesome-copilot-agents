@@ -110,3 +110,67 @@ agents:
       - src/fragments/approval-bounded-request-is-authorization.md
       - src/fragments/handoff-v1.md
       - src/fragments/surface-fallback.md
+
+  - id: api-architect
+    description: Designs technology-independent REST or GraphQL contracts before implementation. Returns api-design-report-v1 with validated OpenAPI or GraphQL artifacts, decisions, open questions, validation evidence, and implementer steps.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [D]
+    contract_id: api-design-report-v1
+    procedure_ids: [PROC-08]
+    profile: src/profiles/api-architect.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: backend-developer
+    description: Polyglot server-side fallback when no exact framework specialist owns the work. Returns backend-implementation-v1 with stack, files, endpoints, design, migrations or security notes, tests, and performance evidence.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: backend-implementation-v1
+    procedure_ids: [PROC-05, PROC-07, PROC-09]
+    profile: src/profiles/backend-developer.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: frontend-developer
+    description: Universal UI fallback when no React or Vue specialist owns user-facing work. Returns frontend-implementation-v1 with framework, components, responsiveness, accessibility, files, and next steps.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, V]
+    contract_id: frontend-implementation-v1
+    procedure_ids: [PROC-05, PROC-07, PROC-09, PROC-14]
+    profile: src/profiles/frontend-developer.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: tailwind-css-expert
+    description: Tailwind utility and theme specialist. Returns component-delivery-v1 with files, repository visual artifact, checklist, and next steps without fabricating unavailable browser previews.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [D, V]
+    contract_id: component-delivery-v1
+    procedure_ids: [PROC-06, PROC-14]
+    profile: src/profiles/tailwind-css-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md

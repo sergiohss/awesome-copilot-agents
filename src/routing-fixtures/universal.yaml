@@ -1,0 +1,147 @@
+fixtures:
+  - id: django-rest-precedence
+    kind: routing
+    request: Add Django REST Framework endpoints with serializers, auth, and OpenAPI docs.
+    expected_agent_id: django-api-developer
+    excluded_alternatives:
+      - api-architect
+      - backend-developer
+    approval_policy: AP-B
+    contract_id: django-api-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: generic-backend-fallback
+    kind: routing
+    request: Implement a small Go HTTP service with no framework specialist in the catalog evidence.
+    expected_agent_id: backend-developer
+    excluded_alternatives:
+      - django-backend-expert
+      - fastapi-expert
+    approval_policy: AP-B
+    contract_id: backend-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: react-component-precedence
+    kind: routing
+    request: Build a reusable React component library with hooks and accessibility tests.
+    expected_agent_id: react-component-architect
+    excluded_alternatives:
+      - frontend-developer
+    approval_policy: AP-B
+    contract_id: react-component-delivery-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: tailwind-utility-work
+    kind: routing
+    request: Refactor dashboard cards to Tailwind utility classes with responsive container queries.
+    expected_agent_id: tailwind-css-expert
+    excluded_alternatives:
+      - frontend-developer
+      - react-component-architect
+    approval_policy: AP-B
+    contract_id: component-delivery-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: api-design-report
+    agent_id: api-architect
+    handoff:
+      handoff_version: 1
+      contract_id: api-design-report-v1
+      status: completed
+      summary: Technology-neutral billing API contract before implementation.
+      artifact_paths:
+        - docs/api/billing-openapi.yaml
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        artifact: docs/api/billing-openapi.yaml
+        decisions:
+          - URI versioning under /v1
+          - Cursor pagination for list endpoints
+        questions:
+          - Should invoice duplication be a sub-resource or action?
+        validation: Spectral lint passed on OpenAPI 3.1 draft
+        implementer_steps:
+          - Generate server stubs in the chosen framework
+          - Wire auth middleware for admin routes
+
+  - id: backend-implementation
+    agent_id: backend-developer
+    handoff:
+      handoff_version: 1
+      contract_id: backend-implementation-v1
+      status: completed
+      summary: Fallback backend feature for an uncommon stack.
+      artifact_paths:
+        - internal/service/handler.go
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        stack:
+          - Go 1.22
+          - chi router
+        files:
+          - internal/service/handler.go
+        endpoints:
+          - GET /health
+          - POST /events
+        design: Handler/service split with explicit validation layer
+        migrations_security: No migrations; input validation and structured logging only
+        tests: Table-driven unit tests for handlers
+        performance: Benchmark shows sub-millisecond handler path on sample hardware
+
+  - id: frontend-implementation
+    agent_id: frontend-developer
+    handoff:
+      handoff_version: 1
+      contract_id: frontend-implementation-v1
+      status: completed
+      summary: Fallback UI delivery for a non-React/Vue stack.
+      artifact_paths:
+        - src/components/Widget.ts
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        framework: Vanilla TypeScript with web components
+        components:
+          - app-widget
+        responsiveness: Mobile-first layout with container-friendly breakpoints
+        accessibility: Semantic roles and focus-visible styles documented
+        files:
+          - src/components/Widget.ts
+        next_steps:
+          - Integrate into host layout shell
+
+  - id: tailwind-component-delivery
+    agent_id: tailwind-css-expert
+    handoff:
+      handoff_version: 1
+      contract_id: component-delivery-v1
+      status: completed
+      summary: Tailwind utility refactor for dashboard cards.
+      artifact_paths:
+        - src/components/DashboardCard.vue
+        - docs/visuals/dashboard-card.md
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        files:
+          - src/components/DashboardCard.vue
+        visual_artifact: docs/visuals/dashboard-card.md
+        checklist:
+          - Utilities follow project Tailwind conventions
+          - Accessibility notes recorded when browser preview unavailable
+        next_steps:
+          - Parent layout integration review

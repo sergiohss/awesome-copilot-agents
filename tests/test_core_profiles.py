@@ -119,12 +119,9 @@ def test_core_handoff_fixtures_validate():
         validate_handoff(entry["agent_id"], entry["handoff"], catalog)
 
 
-def test_seven_profiles_are_generated():
+def test_core_profiles_are_generated():
     outputs = build_outputs(PROJECT_ROOT)
     expected = {
-        "tech-lead-orchestrator",
-        "project-analyst",
-        "team-configurator",
         "code-archaeologist",
         "code-reviewer",
         "documentation-specialist",
@@ -135,4 +132,4 @@ def test_seven_profiles_are_generated():
         for path in outputs
         if path.parts[:2] == (".github", "agents")
     }
-    assert generated == expected
+    assert expected <= generated

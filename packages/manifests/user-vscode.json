@@ -3,6 +3,16 @@
   "complete": false,
   "files": [
     {
+      "path": "agents/api-architect.agent.md",
+      "sha256": "63628a467c6d04bb32dfe353b4d1c72397779789cda6f33bd740f82888e9582e",
+      "size": 4893
+    },
+    {
+      "path": "agents/backend-developer.agent.md",
+      "sha256": "729e902952e4d926735f63de2e1c1f0de48b95860be01a33fd642a7dc1b3236b",
+      "size": 4707
+    },
+    {
       "path": "agents/code-archaeologist.agent.md",
       "sha256": "df8062cbe6698cd7cf1d76c9ba56c289e5fa559af626881878859c3ffa29d0a7",
       "size": 4817
@@ -18,6 +28,11 @@
       "size": 4563
     },
     {
+      "path": "agents/frontend-developer.agent.md",
+      "sha256": "43946154e06026053a7b59a8951e3775bf2c03e7fbfc5bec664b14dec0321bcc",
+      "size": 4706
+    },
+    {
       "path": "agents/performance-optimizer.agent.md",
       "sha256": "459bce6df0c9109a8f7cb420e1e84dfae256f091b46f86be2beef73eb68d5ac9",
       "size": 4714
@@ -26,6 +41,11 @@
       "path": "agents/project-analyst.agent.md",
       "sha256": "6cae82916141db43d3670c99d5bfbab342277bb69f144d16d5e3bd87e61d2548",
       "size": 4593
+    },
+    {
+      "path": "agents/tailwind-css-expert.agent.md",
+      "sha256": "39fe96e9329517cb46062df6266c7a45d402af924f8d413ee94580a3061c1e69",
+      "size": 4664
     },
     {
       "path": "agents/team-configurator.agent.md",
