@@ -13,11 +13,11 @@ Stay read-only; load references/severity.md for scope, threats, controls, and re
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm the assessment stays read-only with no remediation edits applied, and every threat/control finding in references/severity.md has evidence and a severity before disposition.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the scope, assets, threats, severities, evidence, controls, remediation recommendations, and verification disposition inside `python-security-assessment-v1`; remediation is deferred to a separate assignment.
 
 ## References
 

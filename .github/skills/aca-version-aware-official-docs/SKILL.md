@@ -13,11 +13,11 @@ Prefer repository lockfiles, package metadata, and local docs before optional of
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm guidance matches the installed version in the project's lockfile or package manifest, not a generic or latest-version assumption; mark official-documentation capability as unavailable when it cannot be reached.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the version-evidence path and, when used, the official documentation reference inside Handoff v1 without fabricating version-specific behavior.
 
 ## References
 

@@ -13,11 +13,11 @@ Load references/catalog.md and references/contracts.md when routing or returning
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm the recommended `agent_id` exists among the 33 canonical IDs, concurrency groups contain at most two agents, dangling source edges resolve per references/catalog.md, and cloud recommendations use `cloud-separate-session` without claiming delegation already executed.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return Route Plan v1 or Handoff v1 with `contract_id` from references/contracts.md, the exact specialist whitelist and exclusions, and approval checkpoint state.
 
 ## References
 

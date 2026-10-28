@@ -13,11 +13,11 @@ Select the narrowest exact specialist; document why universal fallbacks are excl
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm the chosen specialist is the narrowest exact owner for the stack and task, and that every excluded universal fallback is named with its exclusion reason.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the selected canonical `agent_id` plus the excluded alternatives and their exclusion reasons inside Handoff v1's `routing` fields.
 
 ## References
 

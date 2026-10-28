@@ -13,11 +13,11 @@ Present assumptions and planned slices; wait for approve, revise, or stop before
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm the checkpoint state is exactly `pending`, `approved`, `revised`, or `stopped`, and that no slice is assigned or delegated while state is `pending` or `stopped`.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the checkpoint state and any revisions inside Handoff v1's `routing`/`result` fields before execution planning proceeds.
 
 ## References
 

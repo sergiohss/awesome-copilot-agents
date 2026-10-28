@@ -13,11 +13,11 @@ Require authorization first; load references/safety.md for API preference, robot
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm explicit authorization exists before any acquisition, an API is preferred over scraping when available, and references/safety.md robots/terms/rate controls are honored with no evasion technique used.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the authorization evidence, source/API preference, compliance controls, schema, validation, and lineage inside `python-acquisition-report-v1`.
 
 ## References
 

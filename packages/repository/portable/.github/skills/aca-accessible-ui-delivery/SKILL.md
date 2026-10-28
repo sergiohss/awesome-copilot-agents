@@ -13,11 +13,11 @@ Verify keyboard, semantics, contrast, and responsive behavior; document visual f
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm references/checklist.md items (keyboard, semantics, contrast, responsive breakpoints) are verified, and visual-evidence fallback is documented explicitly when browser tooling is unavailable.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the owning implementation contract with the accessibility checklist result and visual-evidence artifact, or its documented fallback, inside Handoff v1.
 
 ## References
 

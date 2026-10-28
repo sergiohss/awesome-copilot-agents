@@ -13,11 +13,11 @@ Emit Handoff v1 with contract_id, status, artifact_paths, routing, and typed res
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm `contract_id` matches the profile's one primary contract, `status` is exactly `completed`, `blocked`, or `needs-approval`, and source-required fields stay inside `result` rather than flattened into `summary`.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the Handoff v1 envelope with `handoff_version`, `contract_id`, `status`, `summary`, `artifact_paths`, `routing`, and typed `result` populated.
 
 ## References
 

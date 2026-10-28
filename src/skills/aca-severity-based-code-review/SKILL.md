@@ -13,11 +13,11 @@ Grade findings with file:line evidence, severity, disposition, positives, checkl
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm every finding carries file:line evidence and an explicit severity, and the overall disposition is exactly PASS or BLOCK with no unresolved blocking finding left ungraded.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the graded findings, positives, checklist, and PASS or BLOCK disposition inside `code-review-v1`.
 
 ## References
 

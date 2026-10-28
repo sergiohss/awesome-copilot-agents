@@ -174,8 +174,8 @@
     },
     {
       "path": ".github/skills/aca-accessible-ui-delivery/SKILL.md",
-      "sha256": "d6af7615b780be5bca295582d235fedb880d4c3111eee6c4348f46695a90b7dd",
-      "size": 666
+      "sha256": "d8caf4a60efc9cfea8f0440a909b18eb1336d8a9ffd4f06ca21d81ef24796ebc",
+      "size": 840
     },
     {
       "path": ".github/skills/aca-accessible-ui-delivery/references/checklist.md",
@@ -184,8 +184,8 @@
     },
     {
       "path": ".github/skills/aca-authorized-scraping-pipeline/SKILL.md",
-      "sha256": "98eb8b7e2733348f2c4012b76c75a1a371cc84b61e3a6a7173bd7d962dd478b0",
-      "size": 697
+      "sha256": "3584a1894cdd0aa4791069a9dfd1fd067db9a95d8271cc5aec586d1bd6f65d9a",
+      "size": 871
     },
     {
       "path": ".github/skills/aca-authorized-scraping-pipeline/references/safety.md",
@@ -194,13 +194,13 @@
     },
     {
       "path": ".github/skills/aca-bounded-instruction-update/SKILL.md",
-      "sha256": "26f83bb515f20fcfe891537f3895892ade5014cc17fc0fc3ec82f4ec2231cef6",
-      "size": 627
+      "sha256": "161f6f798ee6247c4904aa0da6a5f89d36f1b575f7cf60ddaae7c8ce833163b8",
+      "size": 748
     },
     {
       "path": ".github/skills/aca-contract-first-api-design/SKILL.md",
-      "sha256": "8ed568e9b77ecc09dad7ee2ed8d8265985d9b180345727afe080be7b81da4c14",
-      "size": 654
+      "sha256": "a1b3cbf6d168c4c306735edbe8a2925ff2145f0162a0193ff3c76db5d741cea5",
+      "size": 788
     },
     {
       "path": ".github/skills/aca-contract-first-api-design/references/checklist.md",
@@ -209,8 +209,8 @@
     },
     {
       "path": ".github/skills/aca-core-orchestration/SKILL.md",
-      "sha256": "ebf03c59156ef1030f8e19f7e27e4e7502a55dcb39c507c3075ad5145f0bcd79",
-      "size": 739
+      "sha256": "6805609a10767549f7fbbadfbd1527f771f930505e7d72f1d02833deb3efc31e",
+      "size": 992
     },
     {
       "path": ".github/skills/aca-core-orchestration/references/catalog.md",
@@ -224,8 +224,8 @@
     },
     {
       "path": ".github/skills/aca-deployment-safety-pipeline/SKILL.md",
-      "sha256": "3b816f783c7ec1c01812c14db23a64f014b875df74a5f7829717416a890f39de",
-      "size": 627
+      "sha256": "cfb1afbd7857b3a734131482f7705b35b385164fb5fa737534ab0cadc80ff0f5",
+      "size": 777
     },
     {
       "path": ".github/skills/aca-deployment-safety-pipeline/references/rollout-rollback.md",
@@ -234,8 +234,8 @@
     },
     {
       "path": ".github/skills/aca-deterministic-agent-routing/SKILL.md",
-      "sha256": "72ee92aedd49b76607249cd4d063689170e748f910b4f744c440ccd8f8e8c062",
-      "size": 635
+      "sha256": "f437ee0866fff2713bdbf2c7b964b1edd826479e7270acb66f2be486eb5d1519",
+      "size": 797
     },
     {
       "path": ".github/skills/aca-deterministic-agent-routing/references/precedence.md",
@@ -244,28 +244,28 @@
     },
     {
       "path": ".github/skills/aca-documentation-gap-closure/SKILL.md",
-      "sha256": "54d1bb998c339be160c856a5f577a99640d7438b246f2f43f576f55310d82bec",
-      "size": 627
+      "sha256": "9971d7f2dbe52b6152ec52ed1bd75e71f56edce92eda86576ebe369a33709236",
+      "size": 736
     },
     {
       "path": ".github/skills/aca-existing-convention-scan/SKILL.md",
-      "sha256": "924d7920b7a87f5de9acd4bc9a0c6ae23ea242b4725e708e61cd3ed2448fb879",
-      "size": 594
+      "sha256": "9e7047ba51b47a742ced4aa9a67dfd725e893b5668f38279304beb996661d1c8",
+      "size": 676
     },
     {
       "path": ".github/skills/aca-human-approval-checkpoint/SKILL.md",
-      "sha256": "91ec1ebd2853bb5b918a3bc2a508c41d839bb457405c853f9f3a3c6093059174",
-      "size": 612
+      "sha256": "926470b8794c479e600c71f8e3520caf93bf29b87e986cbb22f0150cabfdb793",
+      "size": 726
     },
     {
       "path": ".github/skills/aca-inventory-first-discovery/SKILL.md",
-      "sha256": "b427ecd5321c4d5608ee34b8b68361ccf1aafebc9485fc4abb4501ee4ee3c6a3",
-      "size": 599
+      "sha256": "a209a6fef5ca907d9db174addf64b59f189d78961931532e08fc89b0e0f4fd18",
+      "size": 713
     },
     {
       "path": ".github/skills/aca-orm-query-optimization/SKILL.md",
-      "sha256": "bc3925b184e780fea69ac6d39e96399c2b23c8137a6d358ce43c49ba2b9d33b4",
-      "size": 645
+      "sha256": "8734bd49ccefd904e8d300360092baeeebc03d82b4d713b969b69d7966d8366e",
+      "size": 745
     },
     {
       "path": ".github/skills/aca-orm-query-optimization/references/evidence.md",
@@ -274,18 +274,18 @@
     },
     {
       "path": ".github/skills/aca-performance-optimization-lifecycle/SKILL.md",
-      "sha256": "e1239f720a7f07955367ef9d35f4b75b3a9f3b89d5646529ed19cad227f94a30",
-      "size": 602
+      "sha256": "f23dd3ebfce1660f3e089fa4d09ee6bb916cd990852678fd8b1d10e53526d338",
+      "size": 758
     },
     {
       "path": ".github/skills/aca-reproducible-ml-lifecycle/SKILL.md",
-      "sha256": "3323785a4cd506678de6d9ca64d9091ba81b60fda79f3132748a81bf22d5d4c1",
-      "size": 605
+      "sha256": "3a9e3de5e668ddb6b93f46ead6ba9516e51aefbbb0ac10b83d3f4eb7a7a8e173",
+      "size": 724
     },
     {
       "path": ".github/skills/aca-secure-code-assessment/SKILL.md",
-      "sha256": "fc47459880379301900227e789dc0a67232d8fafbcc279e016f3977d5d6c3aa5",
-      "size": 633
+      "sha256": "c5eda7ea5d8fe36093eb4834738a4909f2d1070706f740a22ed462745ddf970c",
+      "size": 845
     },
     {
       "path": ".github/skills/aca-secure-code-assessment/references/severity.md",
@@ -294,33 +294,33 @@
     },
     {
       "path": ".github/skills/aca-severity-based-code-review/SKILL.md",
-      "sha256": "ab96e9436d7c54beb29f76c61ac6bf684e2c78b20d20a21f8f734b8903caaec9",
-      "size": 624
+      "sha256": "beab5300da64c5b64bf14e1b7f72acd10c52a6c36562215e626b1544feb754ce",
+      "size": 724
     },
     {
       "path": ".github/skills/aca-specialist-first-selection/SKILL.md",
-      "sha256": "9653c792bff55b322aee123befcb8752e99f5272dca7bb38c4e15baf3f381f04",
-      "size": 586
+      "sha256": "e7aed8557c9a84cf02c1ead65c872ed8b837c5cbcf3a0d8e2833083e39516001",
+      "size": 702
     },
     {
       "path": ".github/skills/aca-stack-detection-with-confidence/SKILL.md",
-      "sha256": "b98c39374c61a21e8c49e40c51e93d9d3d482f7a9679bbc2a5b74865b0a653aa",
-      "size": 597
+      "sha256": "979dac40582445bfdefa420ec0daa868f4c2f0a2f6445029a2ce7cc0e82eb3a3",
+      "size": 788
     },
     {
       "path": ".github/skills/aca-structured-implementation-handoff/SKILL.md",
-      "sha256": "80d264961b6634604db4dd219c134f639d9f02dccde4688b1e1cee939c4fcf23",
-      "size": 595
+      "sha256": "beee824b5d6164dbae8bbf6082e362c8bdfd7345b44e158f37bbb28f0249b709",
+      "size": 778
     },
     {
       "path": ".github/skills/aca-test-strategy-design/SKILL.md",
-      "sha256": "e84fe5361cde1a692181e3ef1018d33162a3784a23876ba3352fa602791c2b36",
-      "size": 612
+      "sha256": "62c43ed44bf97388701b6aec0fc2996503551a659d38f648c17941ebad94eaac",
+      "size": 757
     },
     {
       "path": ".github/skills/aca-version-aware-official-docs/SKILL.md",
-      "sha256": "d121a696c78362cdca5000dc58ee4c7cad964355f1e3e4d9ebd153f3e2959cdd",
-      "size": 671
+      "sha256": "b7a39545c862822e5340e01e7233755eabfc240f03775557b73543612d924390",
+      "size": 857
     }
   ],
   "license_spdx": "MIT",

@@ -13,11 +13,11 @@ Inventory files, manifests, configs, and runtime entry points before conclusions
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm every finding cites a concrete file, manifest, or config path; flag claims without a discovered artifact as assumptions, not facts.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the inventoried entry points, manifests, and configs with their repository-relative paths inside Handoff v1 before any downstream conclusion is drawn.
 
 ## References
 

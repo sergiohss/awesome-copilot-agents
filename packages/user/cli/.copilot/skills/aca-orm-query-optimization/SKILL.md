@@ -13,11 +13,11 @@ Capture baseline queries, explain plans or ORM metrics, proposed change, and mig
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm references/evidence.md captures the before query/explain-plan evidence, the after evidence post-change, and the migration risk for any schema change.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the before-and-after metrics, schema/index changes, and migration risk disposition inside Handoff v1's typed `result`.
 
 ## References
 

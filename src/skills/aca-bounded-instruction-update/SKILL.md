@@ -13,11 +13,11 @@ Edit only the marked generated block, show preview diff, and obtain AP-X before 
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm only the marked generated block changes, prose outside that block is untouched, and AP-X approval is obtained on the preview diff before any instruction or catalog file is written.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the preview diff, approval state, and written file paths, added only after AP-X approval, inside Handoff v1.
 
 ## References
 

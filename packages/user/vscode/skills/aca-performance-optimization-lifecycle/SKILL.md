@@ -13,11 +13,11 @@ Baseline, profile, implement one change, compare deltas, and record regression d
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm a measured baseline exists before any change, exactly one change is applied per iteration, and the comparison records a regression or improvement disposition rather than an unmeasured guess.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the baseline, profiled bottleneck, applied change, before/after delta, and regression disposition inside Handoff v1's typed `result`.
 
 ## References
 

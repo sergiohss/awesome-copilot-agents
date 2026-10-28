@@ -13,11 +13,11 @@ Map risk layers to unit, integration, property, and mutation evidence with pytes
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm the test layers map to an explicit risk level, fixtures reflect real dependencies rather than mocks of the system under test, and every pytest command run is reported with its result.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the risk map, test layers, fixtures, pytest commands/evidence, and coverage or mutation gaps inside `python-testing-delivery-v1`.
 
 ## References
 

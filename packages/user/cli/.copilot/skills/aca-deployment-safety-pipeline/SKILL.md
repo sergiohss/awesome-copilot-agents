@@ -13,11 +13,11 @@ Load references/rollout-rollback.md for staged rollout, rollback triggers, and c
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm references/rollout-rollback.md staged rollout and rollback triggers are defined before any pipeline or infrastructure change, and credential-bearing steps carry explicit AP-X approval.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the pipeline/deployment artifact with rollout stages, rollback triggers, and credential/infrastructure gate status inside Handoff v1.
 
 ## References
 

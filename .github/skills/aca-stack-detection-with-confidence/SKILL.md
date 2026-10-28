@@ -13,11 +13,11 @@ Report stack signals, architecture shape, confidence, contradictions, and unknow
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm stack claims cite the manifest or lockfile that produced them, confidence is stated per claim rather than as a blanket score, and every contradiction or unknown is listed instead of silently resolved.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return `stack-analysis-v1` with detected stack, architecture shape, per-claim confidence, contradictions, unknowns, and specialist recommendations inside Handoff v1.
 
 ## References
 

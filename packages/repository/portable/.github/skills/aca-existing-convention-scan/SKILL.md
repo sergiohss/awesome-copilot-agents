@@ -13,11 +13,11 @@ Mirror existing folder layout, naming, testing, and formatting conventions befor
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm new code mirrors an existing repository example (naming, folder layout, test placement, formatting) rather than introducing a second convention.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the existing-pattern evidence path used as the template inside Handoff v1's `artifact_paths` or `result`.
 
 ## References
 

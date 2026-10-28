@@ -13,11 +13,11 @@ Load references/precedence.md for exact IDs, exclusions, dangling-edge substitut
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm the selected ID is one of the 33 canonical agents, specialists are preferred over universal fallbacks, excluded alternatives are named, and dangling source edges are substituted per references/precedence.md.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the routing decision with `recommended_next_agent`, exclusions, and dependency order inside Handoff v1's `routing` fields.
 
 ## References
 

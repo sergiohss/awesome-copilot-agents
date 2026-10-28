@@ -13,11 +13,11 @@ Load references/checklist.md to validate endpoints, schemas, errors, auth, and c
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm references/checklist.md items (endpoints, schemas, errors, auth, consumer workflow) are validated before implementation starts, and open questions are listed rather than guessed.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return `api-design-report-v1` with the contract artifact, decisions, open questions, and implementer next steps inside Handoff v1.
 
 ## References
 

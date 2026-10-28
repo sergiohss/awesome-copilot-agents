@@ -13,11 +13,11 @@ Identify audience gaps, update accurate docs, and summarize changes in a concise
 
 ## Checks
 
-Confirm evidence paths, approval policy, and surface fallback before claiming completion.
+Confirm the identified gap is tied to a real reader audience and the updated doc content matches current repository behavior, not stale or aspirational text.
 
 ## Output
 
-Return the procedure contract fields inside Handoff v1 without inventing unavailable tooling.
+Return the updated documentation artifact paths and a concise changelog entry describing the audience-facing change inside Handoff v1.
 
 ## References
 
