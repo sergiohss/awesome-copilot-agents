@@ -119,16 +119,38 @@ def _inventory(files: dict[PurePosixPath, bytes]) -> list[dict[str, object]]:
     ]
 
 
-def _make_complete_release_project(minimal_project) -> None:
+def _make_complete_release_project(
+    minimal_project,
+) -> dict[str, dict[PurePosixPath, bytes]]:
+    expected_fragment = b"Report evidence and never fabricate findings.\n"
+    expected_instruction = b"Use repository evidence first.\n"
+    assert minimal_project.fragment.read_bytes() == expected_fragment
+    assert (
+        minimal_project.root / "src/instructions/copilot.md"
+    ).read_bytes() == expected_instruction
+
+    expected = {
+        "repository": {
+            PurePosixPath(".github/copilot-instructions.md"): expected_instruction,
+        },
+        "repository-portable": {
+            PurePosixPath(".github/copilot-instructions.md"): expected_instruction,
+        },
+        "user-cli": {},
+        "user-vscode": {},
+    }
     agents_path = minimal_project.root / "src/catalog/agents.yaml"
     agents_document = yaml.safe_load(agents_path.read_text(encoding="utf-8"))
     template = agents_document["agents"][0]
+    assert template["tools"] == ["read", "search", "execute"]
+    assert template["fragments"] == ["src/fragments/ins-core.md"]
     profiles = minimal_project.root / "src/profiles"
     agents = []
     for index in range(33):
         agent_id = f"release-agent-{index:02d}"
+        body = f"Release profile {index}.\n".encode()
         profile = profiles / f"{agent_id}.md"
-        profile.write_text(f"Release profile {index}.\n", encoding="utf-8")
+        profile.write_bytes(body)
         agent = deepcopy(template)
         agent.update(
             {
@@ -139,6 +161,27 @@ def _make_complete_release_project(minimal_project) -> None:
             }
         )
         agents.append(agent)
+
+        rendered = (
+            f"---\n"
+            f"name: {agent_id}\n"
+            f'description: "Release agent {index}."\n'
+            f"tools: [read, search, execute]\n"
+            f"---\n\n"
+            f"Release profile {index}.\n\n"
+            f"Report evidence and never fabricate findings.\n"
+        ).encode()
+        filename = f"{agent_id}.agent.md"
+        expected["repository"][
+            PurePosixPath(".github/agents") / filename
+        ] = rendered
+        expected["repository-portable"][
+            PurePosixPath(".github/agents") / filename
+        ] = rendered
+        expected["user-cli"][
+            PurePosixPath(".copilot/agents") / filename
+        ] = rendered
+        expected["user-vscode"][PurePosixPath("agents") / filename] = rendered
     agents_path.write_text(
         yaml.safe_dump({"agents": agents}, sort_keys=False),
         encoding="utf-8",
@@ -156,17 +199,29 @@ def _make_complete_release_project(minimal_project) -> None:
                 "contract": f"Release procedure {index}.",
             }
         )
+        skill_source = f"# Release skill {index}: Cafe\u0301\r\n".encode()
+        skill_data = f"# Release skill {index}: Café\n".encode()
         skill = skills_root / skill_name
         skill.mkdir(parents=True)
-        (skill / "SKILL.md").write_text(
-            f"# Release skill {index}\n",
-            encoding="utf-8",
-        )
+        (skill / "SKILL.md").write_bytes(skill_source)
+        expected["repository"][
+            PurePosixPath(".github/skills") / skill_name / "SKILL.md"
+        ] = skill_data
+        expected["repository-portable"][
+            PurePosixPath(".github/skills") / skill_name / "SKILL.md"
+        ] = skill_data
+        expected["user-cli"][
+            PurePosixPath(".copilot/skills") / skill_name / "SKILL.md"
+        ] = skill_data
+        expected["user-vscode"][
+            PurePosixPath("skills") / skill_name / "SKILL.md"
+        ] = skill_data
     procedures_path = minimal_project.root / "src/catalog/procedures.yaml"
     procedures_path.write_text(
         yaml.safe_dump({"procedures": procedures}, sort_keys=False),
         encoding="utf-8",
     )
+    return expected
 
 
 def test_render_emits_exact_portable_frontmatter(minimal_project):
@@ -298,7 +353,7 @@ def test_cli_release_builds_complete_33_profile_21_skill_packages(
     minimal_project,
     capsys,
 ):
-    _make_complete_release_project(minimal_project)
+    expected_snapshots = _make_complete_release_project(minimal_project)
 
     exit_code = cli_main(
         ["--release", "--root", str(minimal_project.root)],
@@ -309,72 +364,22 @@ def test_cli_release_builds_complete_33_profile_21_skill_packages(
     assert "complete: true" in captured.out
     assert captured.err == ""
 
-    agent_names = {f"release-agent-{index:02d}.agent.md" for index in range(33)}
-    skill_names = {f"aca-release-skill-{index:02d}" for index in range(21)}
-    expected_paths = {
-        "repository": {
-            PurePosixPath(".github/copilot-instructions.md"),
-            *(PurePosixPath(".github/agents") / name for name in agent_names),
-            *(
-                PurePosixPath(".github/skills") / name / "SKILL.md"
-                for name in skill_names
-            ),
-        },
-        "repository-portable": {
-            PurePosixPath(".github/copilot-instructions.md"),
-            *(PurePosixPath(".github/agents") / name for name in agent_names),
-            *(
-                PurePosixPath(".github/skills") / name / "SKILL.md"
-                for name in skill_names
-            ),
-        },
-        "user-cli": {
-            *(PurePosixPath(".copilot/agents") / name for name in agent_names),
-            *(
-                PurePosixPath(".copilot/skills") / name / "SKILL.md"
-                for name in skill_names
-            ),
-        },
-        "user-vscode": {
-            *(PurePosixPath("agents") / name for name in agent_names),
-            *(PurePosixPath("skills") / name / "SKILL.md" for name in skill_names),
-        },
-    }
     snapshots = _package_snapshots(minimal_project.root)
+    assert snapshots == expected_snapshots
     assert {
-        package_id: set(files)
-        for package_id, files in snapshots.items()
-    } == expected_paths
-    assert snapshots["repository"] == snapshots["repository-portable"]
-
-    for name in agent_names:
-        repository_data = snapshots["repository"][
-            PurePosixPath(".github/agents") / name
-        ]
-        assert snapshots["user-cli"][PurePosixPath(".copilot/agents") / name] == repository_data
-        assert snapshots["user-vscode"][PurePosixPath("agents") / name] == repository_data
-    for name in skill_names:
-        repository_data = snapshots["repository"][
-            PurePosixPath(".github/skills") / name / "SKILL.md"
-        ]
-        assert snapshots["user-cli"][
-            PurePosixPath(".copilot/skills") / name / "SKILL.md"
-        ] == repository_data
-        assert snapshots["user-vscode"][
-            PurePosixPath("skills") / name / "SKILL.md"
-        ] == repository_data
-
-    repository_instruction = minimal_project.root.joinpath(
-        "src/instructions/copilot.md"
-    ).read_bytes()
-    assert snapshots["repository"][
-        PurePosixPath(".github/copilot-instructions.md")
-    ] == repository_instruction
+        package_id: len(files)
+        for package_id, files in expected_snapshots.items()
+    } == {
+        "repository": 55,
+        "repository-portable": 55,
+        "user-cli": 54,
+        "user-vscode": 54,
+    }
 
     for manifest_path, (package_id, _) in PACKAGE_ROOTS.items():
         manifest = json.loads((minimal_project.root / manifest_path).read_bytes())
         assert manifest["complete"] is True
-        assert manifest["files"] == _inventory(snapshots[package_id])
+        assert manifest["files"] == _inventory(expected_snapshots[package_id])
 
 
 def test_outputs_match_all_package_layouts_and_manifest_metadata(minimal_project):
