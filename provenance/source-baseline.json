@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "adaptation_version": "0.1.0-design.1",
+  "upstream_repository": "https://github.com/vijaythecoder/awesome-claude-agents.git",
+  "upstream_commit": "2050f3c60fcfea497f7b6b3ec6566cc316367a7e",
+  "agents": [
+    {
+      "path": "agents/core/code-archaeologist.md",
+      "line_count": 90,
+      "sha256": "fe7e2fdbd9da3706642e97c470b1d8d35fefa8ef449c885102faca0680c03832"
+    },
+    {
+      "path": "agents/core/code-reviewer.md",
+      "line_count": 88,
+      "sha256": "3de9668245b1da9615d25f877bf90917d1c40e64b4151f203421d58965ccd999"
+    },
+    {
+      "path": "agents/core/documentation-specialist.md",
+      "line_count": 100,
+      "sha256": "946ccfc8b60a2329f46b5fa234704a00de9ae4fab15bc3b29caf96426eac145f"
+    },
+    {
+      "path": "agents/core/performance-optimizer.md",
+      "line_count": 67,
+      "sha256": "0e3acdb6d4b9bf47b68fd5448f66ac5cc074b4f8df66809cbcae121c12c81b4a"
+    },
+    {
+      "path": "agents/orchestrators/project-analyst.md",
+      "line_count": 66,
+      "sha256": "5f0e2fa3f42f0b733d7c6714464f49111cf89eea009630e2f6f49d02b2c1ef62"
+    },
+    {
+      "path": "agents/orchestrators/team-configurator.md",
+      "line_count": 54,
+      "sha256": "ed70fb22e315ac3a0832be3d052e48cb46ec7de6379a538e3f052acd6eebb31b"
+    },
+    {
+      "path": "agents/orchestrators/tech-lead-orchestrator.md",
+      "line_count": 103,
+      "sha256": "da53e5fc66391ddbc0d2f446f7db7da51a947637c01e861966bb6d444bc1772e"
+    },
+    {
+      "path": "agents/specialized/django/django-api-developer.md",
+      "line_count": 804,
+      "sha256": "72ffcf843514d7de4a2598c1c65a4c8546e5b64ae6b6170612c6255370fecde6"
+    },
+    {
+      "path": "agents/specialized/django/django-backend-expert.md",
+      "line_count": 875,
+      "sha256": "f84587c6af09f3a82d32302367d17e3f211d844bb4d13470d4ffaa67e80e1b3f"
+    },
+    {
+      "path": "agents/specialized/django/django-orm-expert.md",
+      "line_count": 828,
+      "sha256": "a545417a97ab914c952d8dc978ed6749e3bee3a0a8c1e6cdcaa8ef24b5118ac5"
+    },
+    {
+      "path": "agents/specialized/laravel/laravel-backend-expert.md",
+      "line_count": 174,
+      "sha256": "551d2d4cb8f334d2d4294a0ce1f44591ae85eb28609e1e323a850691ce7acfba"
+    },
+    {
+      "path": "agents/specialized/laravel/laravel-eloquent-expert.md",
+      "line_count": 74,
+      "sha256": "03e45b50727c117b93feb64378978917e07a5cf510d13ec558254e75f1a1e4b2"
+    },
+    {
+      "path": "agents/specialized/python/devops-cicd-expert.md",
+      "line_count": 1312,
+      "sha256": "3abd933750d4ac53dafebb16ec6af52bf9a8cd84c64cc06de1975e9bd9f6de88"
+    },
+    {
+      "path": "agents/specialized/python/django-expert.md",
+      "line_count": 1508,
+      "sha256": "77fb05047aa4b2e0a7a522710c67730041db8e32192e81321f1fecf3345c5046"
+    },
+    {
+      "path": "agents/specialized/python/fastapi-expert.md",
+      "line_count": 1074,
+      "sha256": "ce0f02e1c66bdfa32b82519cc5fce06cfa9553d7d8893790ab25f4d8a3710d44"
+    },
+    {
+      "path": "agents/specialized/python/ml-data-expert.md",
+      "line_count": 1337,
+      "sha256": "70f7cd08ef6fbe81530d979ac736b93069ca99f1117c3ea276194101cea705e7"
+    },
+    {
+      "path": "agents/specialized/python/performance-expert.md",
+      "line_count": 1796,
+      "sha256": "bc01188cc5ae42e8bae4e8be84b7d3cdecb333a4e10a8b31b1edd8d8a68025b2"
+    },
+    {
+      "path": "agents/specialized/python/python-expert.md",
+      "line_count": 1658,
+      "sha256": "f573bd29478b7d1e74d95fa6a05ae8fe63c96c558abc7e161d54ef2e2e10803c"
+    },
+    {
+      "path": "agents/specialized/python/security-expert.md",
+      "line_count": 1793,
+      "sha256": "52e53643cc0044831f31ea22c1e0d4ddab6771283d711b12526dc2a7e7d42361"
+    },
+    {
+      "path": "agents/specialized/python/testing-expert.md",
+      "line_count": 1668,
+      "sha256": "2ac58993e2e80ae1a7bb4244b735b9b14db1e27246c35390a3bc252e5aa7c461"
+    },
+    {
+      "path": "agents/specialized/python/web-scraping-expert.md",
+      "line_count": 1536,
+      "sha256": "f3718efbb062be53ce3f2f06acc76f6af25e0d5d770605b8cc63db30966bd397"
+    },
+    {
+      "path": "agents/specialized/rails/rails-activerecord-expert.md",
+      "line_count": 690,
+      "sha256": "e25cfa9ccf0799c0896750332ba42dc8b30be0e8e11dc600759b7962eead377a"
+    },
+    {
+      "path": "agents/specialized/rails/rails-api-developer.md",
+      "line_count": 943,
+      "sha256": "73fb7bbc61bf3cc73791a897570f41d9538ba6df04df0e564ef78c7b2d060c37"
+    },
+    {
+      "path": "agents/specialized/rails/rails-backend-expert.md",
+      "line_count": 876,
+      "sha256": "4572a8778431e8b7855b303ac5fcfed6b31bf7a4a6cd6085f23832d088181440"
+    },
+    {
+      "path": "agents/specialized/react/react-component-architect.md",
+      "line_count": 41,
+      "sha256": "9fb41f0aa0d38633e4d3119c7dd5af4a510683f38d5771f4b08b207eb3c8f330"
+    },
+    {
+      "path": "agents/specialized/react/react-nextjs-expert.md",
+      "line_count": 141,
+      "sha256": "6fb180bae711ff8f98e3bc7ccd83d2b88c073a1bd9c6410675a8360b871a0f15"
+    },
+    {
+      "path": "agents/specialized/vue/vue-component-architect.md",
+      "line_count": 98,
+      "sha256": "6fa1f26526fd97106d0d952b8493a9fc55ce6732c5d231d4648cccc56d7b391f"
+    },
+    {
+      "path": "agents/specialized/vue/vue-nuxt-expert.md",
+      "line_count": 720,
+      "sha256": "035d4fc1bba137a7b452e58691222cf484902c01799b7c95742c7df64e755b01"
+    },
+    {
+      "path": "agents/specialized/vue/vue-state-manager.md",
+      "line_count": 33,
+      "sha256": "7f0dea3b44c7ea95a5ea1d7084b9cdf3fc59892bf627217ca6cece6c902dec2c"
+    },
+    {
+      "path": "agents/universal/api-architect.md",
+      "line_count": 84,
+      "sha256": "436f7b202605734f90683eb2fb2e3b83b71185b76746935c104ee90e07a76eb4"
+    },
+    {
+      "path": "agents/universal/backend-developer.md",
+      "line_count": 95,
+      "sha256": "4b5674408432d6059a0181d2b2ed3e000edefd854b4d6b97a95594784fc31920"
+    },
+    {
+      "path": "agents/universal/frontend-developer.md",
+      "line_count": 66,
+      "sha256": "34d83ac414ddd224776286aca13216991d028051e833c75345c898c066e41555"
+    },
+    {
+      "path": "agents/universal/tailwind-css-expert.md",
+      "line_count": 84,
+      "sha256": "f869559fa22d3f299d3ed8219e79df7acd7c0d4bc129e1e83af33f24d53eed94"
+    }
+  ],
+  "license": {
+    "path": "LICENSE",
+    "spdx": "MIT",
+    "sha256": "6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa",
+    "attribution": "Copyright (c) 2024 Awesome Claude Agents Contributors"
+  },
+  "approval": {
+    "path": "CLAUDE.md",
+    "sha256": "c2cc9e33425eedfe433d0699d0085e4548897fd33a33ca1cdf51b9b67990eeed",
+    "ranges": [
+      {
+        "start_line": 101,
+        "end_line": 106
+      },
+      {
+        "start_line": 189,
+        "end_line": 189
+      }
+    ]
+  }
+}

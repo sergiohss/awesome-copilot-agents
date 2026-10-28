@@ -1,0 +1,64 @@
+procedures:
+  - id: PROC-00
+    skill_name: aca-core-orchestration
+    contract: 33-agent catalog, Route Plan v1, Handoff v1, specialist precedence, two-agent policy, surface fallbacks, contracts, dangling-edge substitutions
+  - id: PROC-01
+    skill_name: aca-inventory-first-discovery
+    contract: Establish evidence-backed inventory before conclusions
+  - id: PROC-02
+    skill_name: aca-stack-detection-with-confidence
+    contract: Detect stack/architecture with confidence and unknowns
+  - id: PROC-03
+    skill_name: aca-deterministic-agent-routing
+    contract: Apply exact IDs, triggers, exclusions, precedence, dependencies
+  - id: PROC-04
+    skill_name: aca-human-approval-checkpoint
+    contract: Approve/revise/stop gate for complex orchestration
+  - id: PROC-05
+    skill_name: aca-specialist-first-selection
+    contract: Exact specialist before universal fallback
+  - id: PROC-06
+    skill_name: aca-version-aware-official-docs
+    contract: Installed/project version and local docs first; official capability second
+  - id: PROC-07
+    skill_name: aca-existing-convention-scan
+    contract: Reuse repository conventions before change
+  - id: PROC-08
+    skill_name: aca-contract-first-api-design
+    contract: Define and validate API contract before implementation
+  - id: PROC-09
+    skill_name: aca-structured-implementation-handoff
+    contract: Produce typed, artifact-aware implementation results
+  - id: PROC-10
+    skill_name: aca-orm-query-optimization
+    contract: Measure query/schema/index changes and migration risk
+  - id: PROC-11
+    skill_name: aca-performance-optimization-lifecycle
+    contract: Baseline, profile, change, compare, regressions
+  - id: PROC-12
+    skill_name: aca-severity-based-code-review
+    contract: Evidence-backed severity, disposition, PASS/BLOCK
+  - id: PROC-13
+    skill_name: aca-documentation-gap-closure
+    contract: Audience/gap analysis, accurate content, concise changelog
+  - id: PROC-14
+    skill_name: aca-accessible-ui-delivery
+    contract: Accessibility, responsive behavior, visual evidence
+  - id: PROC-15
+    skill_name: aca-test-strategy-design
+    contract: Risk-layered Python test strategy and evidence
+  - id: PROC-16
+    skill_name: aca-secure-code-assessment
+    contract: Scope, threat, evidence, control, remediation disposition
+  - id: PROC-17
+    skill_name: aca-deployment-safety-pipeline
+    contract: CI/CD, rollout, rollback, credential and infrastructure gates
+  - id: PROC-18
+    skill_name: aca-reproducible-ml-lifecycle
+    contract: Reproducible data/model/training/serving lifecycle
+  - id: PROC-19
+    skill_name: aca-authorized-scraping-pipeline
+    contract: Authorization, API preference, robots/terms/rate compliance, lineage
+  - id: PROC-20
+    skill_name: aca-bounded-instruction-update
+    contract: Generated-block-only instruction/catalog update with approved diff

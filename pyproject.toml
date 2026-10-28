@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "awesome-copilot-agents"
+version = "0.1.0.dev1"
+description = "Deterministic GitHub Copilot agent distribution tooling"
+readme = "docs/design/architecture.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+  "jsonschema>=4.23,<5",
+  "PyYAML>=6.0,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<9"]
+
+[tool.setuptools]
+packages = ["aca_tools"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

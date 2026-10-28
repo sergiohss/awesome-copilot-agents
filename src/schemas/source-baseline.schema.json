@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesome-copilot-agents.example/schemas/source-baseline.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "adaptation_version", "upstream_repository", "upstream_commit", "agents", "license", "approval"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "adaptation_version": {"type": "string", "minLength": 1},
+    "upstream_repository": {"type": "string", "minLength": 1},
+    "upstream_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "agents": {
+      "type": "array",
+      "minItems": 33,
+      "maxItems": 33,
+      "items": {"$ref": "#/$defs/file"}
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "spdx", "sha256", "attribution"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "spdx": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "attribution": {"type": "string", "minLength": 1}
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "ranges"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "ranges": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/range"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "line_count", "sha256"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^agents/.+\\.md$"},
+        "line_count": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start_line", "end_line"],
+      "properties": {
+        "start_line": {"type": "integer", "minimum": 1},
+        "end_line": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

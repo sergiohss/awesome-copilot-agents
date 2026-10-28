@@ -1,0 +1,34 @@
+source_path,source_filename_id,source_declared_name,canonical_id,contract_id,identity_disposition,lineage_path
+agents/core/code-archaeologist.md,code-archaeologist,code-archaeologist,code-archaeologist,codebase-assessment-v1,retained,provenance/lineage/code-archaeologist.yaml
+agents/core/code-reviewer.md,code-reviewer,code-reviewer,code-reviewer,code-review-v1,retained,provenance/lineage/code-reviewer.yaml
+agents/core/documentation-specialist.md,documentation-specialist,documentation-specialist,documentation-specialist,documentation-changelog-v1,retained,provenance/lineage/documentation-specialist.yaml
+agents/core/performance-optimizer.md,performance-optimizer,performance-optimizer,performance-optimizer,performance-report-v1,retained,provenance/lineage/performance-optimizer.yaml
+agents/orchestrators/project-analyst.md,project-analyst,project-analyst,project-analyst,stack-analysis-v1,retained,provenance/lineage/project-analyst.yaml
+agents/orchestrators/team-configurator.md,team-configurator,team-configurator,team-configurator,team-configuration-v1,retained,provenance/lineage/team-configurator.yaml
+agents/orchestrators/tech-lead-orchestrator.md,tech-lead-orchestrator,tech-lead-orchestrator,tech-lead-orchestrator,route-plan-v1,retained,provenance/lineage/tech-lead-orchestrator.yaml
+agents/specialized/django/django-api-developer.md,django-api-developer,django-api-developer,django-api-developer,django-api-implementation-v1,retained,provenance/lineage/django-api-developer.yaml
+agents/specialized/django/django-backend-expert.md,django-backend-expert,django-backend-expert,django-backend-expert,django-backend-implementation-v1,retained,provenance/lineage/django-backend-expert.yaml
+agents/specialized/django/django-orm-expert.md,django-orm-expert,django-orm-expert,django-orm-expert,django-orm-optimization-v1,retained,provenance/lineage/django-orm-expert.yaml
+agents/specialized/laravel/laravel-backend-expert.md,laravel-backend-expert,laravel-backend-expert,laravel-backend-expert,laravel-implementation-v1,retained,provenance/lineage/laravel-backend-expert.yaml
+agents/specialized/laravel/laravel-eloquent-expert.md,laravel-eloquent-expert,laravel-eloquent-expert,laravel-eloquent-expert,eloquent-work-summary-v1,retained,provenance/lineage/laravel-eloquent-expert.yaml
+agents/specialized/python/devops-cicd-expert.md,devops-cicd-expert,Python DevOps/CI-CD Expert,python-devops-cicd-expert,python-deployment-delivery-v1,corrected:X-N,provenance/lineage/python-devops-cicd-expert.yaml
+agents/specialized/python/django-expert.md,django-expert,django-expert,django-expert,django-fullstack-implementation-v1,retained,provenance/lineage/django-expert.yaml
+agents/specialized/python/fastapi-expert.md,fastapi-expert,fastapi-expert,fastapi-expert,fastapi-implementation-v1,retained,provenance/lineage/fastapi-expert.yaml
+agents/specialized/python/ml-data-expert.md,ml-data-expert,ml-data-expert,ml-data-expert,ml-data-implementation-v1,retained,provenance/lineage/ml-data-expert.yaml
+agents/specialized/python/performance-expert.md,performance-expert,Python Performance Expert,python-performance-expert,python-performance-report-v1,corrected:X-N,provenance/lineage/python-performance-expert.yaml
+agents/specialized/python/python-expert.md,python-expert,python-expert,python-expert,python-implementation-v1,retained,provenance/lineage/python-expert.yaml
+agents/specialized/python/security-expert.md,security-expert,Python Security Expert,python-security-expert,python-security-assessment-v1,corrected:X-N,provenance/lineage/python-security-expert.yaml
+agents/specialized/python/testing-expert.md,testing-expert,Python Testing Expert,python-testing-expert,python-testing-delivery-v1,corrected:X-N,provenance/lineage/python-testing-expert.yaml
+agents/specialized/python/web-scraping-expert.md,web-scraping-expert,Python Web Scraping Expert,python-web-scraping-expert,python-acquisition-report-v1,corrected:X-N,provenance/lineage/python-web-scraping-expert.yaml
+agents/specialized/rails/rails-activerecord-expert.md,rails-activerecord-expert,rails-activerecord-expert,rails-activerecord-expert,rails-activerecord-optimization-v1,retained,provenance/lineage/rails-activerecord-expert.yaml
+agents/specialized/rails/rails-api-developer.md,rails-api-developer,rails-api-developer,rails-api-developer,rails-api-implementation-v1,retained,provenance/lineage/rails-api-developer.yaml
+agents/specialized/rails/rails-backend-expert.md,rails-backend-expert,rails-backend-expert,rails-backend-expert,rails-backend-implementation-v1,retained,provenance/lineage/rails-backend-expert.yaml
+agents/specialized/react/react-component-architect.md,react-component-architect,react-component-architect,react-component-architect,react-component-delivery-v1,retained,provenance/lineage/react-component-architect.yaml
+agents/specialized/react/react-nextjs-expert.md,react-nextjs-expert,react-nextjs-expert,react-nextjs-expert,nextjs-implementation-v1,retained,provenance/lineage/react-nextjs-expert.yaml
+agents/specialized/vue/vue-component-architect.md,vue-component-architect,vue-component-architect,vue-component-architect,vue-implementation-v1,retained,provenance/lineage/vue-component-architect.yaml
+agents/specialized/vue/vue-nuxt-expert.md,vue-nuxt-expert,vue-nuxt-expert,vue-nuxt-expert,nuxt-implementation-v1,retained,provenance/lineage/vue-nuxt-expert.yaml
+agents/specialized/vue/vue-state-manager.md,vue-state-manager,vue-component-architect,vue-state-manager,vue-state-delivery-v1,corrected:X-N,provenance/lineage/vue-state-manager.yaml
+agents/universal/api-architect.md,api-architect,api-architect,api-architect,api-design-report-v1,retained,provenance/lineage/api-architect.yaml
+agents/universal/backend-developer.md,backend-developer,backend-developer,backend-developer,backend-implementation-v1,retained,provenance/lineage/backend-developer.yaml
+agents/universal/frontend-developer.md,frontend-developer,frontend-developer,frontend-developer,frontend-implementation-v1,retained,provenance/lineage/frontend-developer.yaml
+agents/universal/tailwind-css-expert.md,tailwind-css-expert,tailwind-frontend-expert,tailwind-css-expert,component-delivery-v1,corrected:X-N,provenance/lineage/tailwind-css-expert.yaml

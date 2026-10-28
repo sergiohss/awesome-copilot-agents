@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesome-copilot-agents.example/schemas/catalog.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["agents", "procedures", "contracts", "instructions"],
+  "properties": {
+    "agents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description", "tools", "tool_policy", "approval_policy", "risk_gates", "surfaces", "contract_id", "procedure_ids", "profile", "fragments"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "description": {"type": "string", "minLength": 1},
+          "tools": {
+            "type": "array",
+            "items": {"enum": ["read", "search", "agent", "edit", "execute"]},
+            "uniqueItems": true
+          },
+          "tool_policy": {"enum": ["T-R", "T-RX", "T-O", "T-E", "T-W"]},
+          "approval_policy": {"enum": ["AP-OC", "AP-B", "AP-X", "AP-R"]},
+          "risk_gates": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "surfaces": {"type": "array", "items": {"enum": ["P", "H", "D", "V", "C"]}, "minItems": 1, "uniqueItems": true},
+          "contract_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "procedure_ids": {"type": "array", "items": {"type": "string", "pattern": "^PROC-(?:0[0-9]|1[0-9]|20)$"}, "uniqueItems": true},
+          "profile": {"type": "string", "minLength": 1},
+          "fragments": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+        }
+      }
+    },
+    "procedures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "skill_name", "contract"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^PROC-(?:0[0-9]|1[0-9]|20)$"},
+          "skill_name": {"type": "string", "pattern": "^aca-[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "contract": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "instructions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "path_specific"],
+      "properties": {
+        "repository": {"type": "string", "minLength": 1},
+        "path_specific": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["apply_to", "instruction"],
+            "properties": {
+              "apply_to": {"type": "string", "minLength": 1},
+              "instruction": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    }
+  }
+}
