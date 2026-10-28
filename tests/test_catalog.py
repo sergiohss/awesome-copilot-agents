@@ -133,6 +133,14 @@ def test_repository_catalog_has_orchestrator_core_and_universal_agents():
         "backend-developer",
         "frontend-developer",
         "tailwind-css-expert",
+        "laravel-backend-expert",
+        "laravel-eloquent-expert",
+        "django-backend-expert",
+        "django-api-developer",
+        "django-orm-expert",
+        "rails-backend-expert",
+        "rails-api-developer",
+        "rails-activerecord-expert",
     }
     assert len(catalog.procedures) == 21
     assert [procedure.id for procedure in catalog.procedures] == [

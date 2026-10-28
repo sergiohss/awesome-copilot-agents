@@ -174,3 +174,131 @@ agents:
       - src/fragments/approval-bounded-request-is-authorization.md
       - src/fragments/handoff-v1.md
       - src/fragments/surface-fallback.md
+
+  - id: laravel-backend-expert
+    description: Laravel application logic specialist for controllers, services, policies, and UI integration. Returns laravel-implementation-v1 with architecture, files, database or UI integration, and dependencies, tests, and docs evidence.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: laravel-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09]
+    profile: src/profiles/laravel-backend-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: laravel-eloquent-expert
+    description: Laravel Eloquent and migration specialist for query and schema bottlenecks. Returns eloquent-work-summary-v1 with models, migrations, decisions, evidence, and next steps; stops before destructive migrations without approval.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: [destructive-migration]
+    surfaces: [D]
+    contract_id: eloquent-work-summary-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09, PROC-10]
+    profile: src/profiles/laravel-eloquent-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: django-backend-expert
+    description: Focused Django backend implementer for apps, services, and integrations without API-only or ORM-only scope. Returns django-backend-implementation-v1 with components, features, integration, next work, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: django-backend-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09]
+    profile: src/profiles/django-backend-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: django-api-developer
+    description: Django REST and GraphQL API specialist. Returns django-api-implementation-v1 with endpoints, auth, serializers, docs and tests, integration and performance notes, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: django-api-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-08, PROC-09]
+    profile: src/profiles/django-api-developer.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: django-orm-expert
+    description: Django ORM and schema performance specialist. Returns django-orm-optimization-v1 with metrics, database and code changes, impact, monitoring, recommendations, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: [destructive-migration]
+    surfaces: [H, D]
+    contract_id: django-orm-optimization-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-10, PROC-11]
+    profile: src/profiles/django-orm-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: rails-backend-expert
+    description: Rails application logic specialist for controllers, services, jobs, and integrations. Returns rails-backend-implementation-v1 with components, features, integrations, gems, next steps, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: rails-backend-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09]
+    profile: src/profiles/rails-backend-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: rails-api-developer
+    description: Rails JSON API specialist for endpoints, auth, serialization, and versioning. Returns rails-api-implementation-v1 with endpoints and versioning, security, serialization errors, docs and tests, integration, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: rails-api-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-08, PROC-09]
+    profile: src/profiles/rails-api-developer.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: rails-activerecord-expert
+    description: ActiveRecord performance specialist for query and schema tuning. Returns rails-activerecord-optimization-v1 with metrics, database and AR changes, impact, recommendations, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: [destructive-migration]
+    surfaces: [H, D]
+    contract_id: rails-activerecord-optimization-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-10, PROC-11]
+    profile: src/profiles/rails-activerecord-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md

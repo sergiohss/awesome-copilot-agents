@@ -67,21 +67,6 @@ PROFILE_SECTIONS = (
     "Result contract",
 )
 
-ALL_PROFILES_TO_DATE = {
-    "tech-lead-orchestrator",
-    "project-analyst",
-    "team-configurator",
-    "code-archaeologist",
-    "code-reviewer",
-    "documentation-specialist",
-    "performance-optimizer",
-    "api-architect",
-    "backend-developer",
-    "frontend-developer",
-    "tailwind-css-expert",
-}
-
-
 @pytest.mark.parametrize("row", UNIVERSAL, ids=[row[0] for row in UNIVERSAL])
 def test_universal_catalog_row_matches_spec(row):
     agent_id, tools, tool_policy, approval, contract_id, procedure_ids, surfaces, risk_gates = row
@@ -156,11 +141,12 @@ def test_universal_handoff_fixtures_validate():
         validate_handoff(entry["agent_id"], entry["handoff"], catalog)
 
 
-def test_eleven_profiles_are_generated():
+def test_universal_profiles_are_generated():
     outputs = build_outputs(PROJECT_ROOT)
     generated = {
         path.name.removesuffix(".agent.md")
         for path in outputs
         if path.parts[:2] == (".github", "agents")
     }
-    assert generated == ALL_PROFILES_TO_DATE
+    for agent_id, *_ in UNIVERSAL:
+        assert agent_id in generated

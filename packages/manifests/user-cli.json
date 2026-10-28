@@ -23,6 +23,21 @@
       "size": 4629
     },
     {
+      "path": ".copilot/agents/django-api-developer.agent.md",
+      "sha256": "b05ec74b9925752a6f75ff36e8077585b4758a1d96f1cc4facc64f989c809c68",
+      "size": 4566
+    },
+    {
+      "path": ".copilot/agents/django-backend-expert.agent.md",
+      "sha256": "00393e0cc041d04d65517196da5ef3fa61ecf87b0659cde63a82a7229e10fa6a",
+      "size": 4626
+    },
+    {
+      "path": ".copilot/agents/django-orm-expert.agent.md",
+      "sha256": "8f5cb886d35243edefe51fe28ea888cbabc2c7ea401c77a6365f0c8a1f1698cc",
+      "size": 4569
+    },
+    {
       "path": ".copilot/agents/documentation-specialist.agent.md",
       "sha256": "574ff6380a6a1d20ed37ae98f23e7407b0b1adcd0485e80899d33ad680f0d3f0",
       "size": 4563
@@ -33,6 +48,16 @@
       "size": 4706
     },
     {
+      "path": ".copilot/agents/laravel-backend-expert.agent.md",
+      "sha256": "a1840a555c13991cf5120894f28e6b6920138cd8ef4d683e4145dbf1f680a763",
+      "size": 4635
+    },
+    {
+      "path": ".copilot/agents/laravel-eloquent-expert.agent.md",
+      "sha256": "23e4f38e7bf5d7e97d87e55785e9b3cfd61105b0b5b906fb180b8ac3249a2c95",
+      "size": 4639
+    },
+    {
       "path": ".copilot/agents/performance-optimizer.agent.md",
       "sha256": "459bce6df0c9109a8f7cb420e1e84dfae256f091b46f86be2beef73eb68d5ac9",
       "size": 4714
@@ -41,6 +66,21 @@
       "path": ".copilot/agents/project-analyst.agent.md",
       "sha256": "6cae82916141db43d3670c99d5bfbab342277bb69f144d16d5e3bd87e61d2548",
       "size": 4593
+    },
+    {
+      "path": ".copilot/agents/rails-activerecord-expert.agent.md",
+      "sha256": "6ab40d5368041dc5c7c35135cfcf001946dfb09c0f4ec5e2ac87da6c5454e855",
+      "size": 4589
+    },
+    {
+      "path": ".copilot/agents/rails-api-developer.agent.md",
+      "sha256": "08953352dcccfb9210de4713d1d94a288404b7ee8269212f261733df5c03e071",
+      "size": 4570
+    },
+    {
+      "path": ".copilot/agents/rails-backend-expert.agent.md",
+      "sha256": "919283aee003ef028051ee45e11d5a6489f49678b0b595d412a0fa2a8e2bde70",
+      "size": 4588
     },
     {
       "path": ".copilot/agents/tailwind-css-expert.agent.md",

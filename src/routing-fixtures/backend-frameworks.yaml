@@ -1,0 +1,250 @@
+fixtures:
+  - id: laravel-application-logic
+    kind: routing
+    request: Implement Laravel controllers, policies, and Blade integration for billing workflows.
+    expected_agent_id: laravel-backend-expert
+    excluded_alternatives:
+      - laravel-eloquent-expert
+      - backend-developer
+    approval_policy: AP-B
+    contract_id: laravel-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: laravel-api-contract-first
+    kind: routing
+    request: Design a technology-neutral Laravel-facing billing API contract before coding controllers.
+    expected_agent_id: api-architect
+    excluded_alternatives:
+      - laravel-api-architect
+      - laravel-backend-expert
+    approval_policy: AP-B
+    contract_id: api-design-report-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: django-api-endpoints
+    kind: routing
+    request: Add Django REST Framework viewsets, serializers, and auth for inventory APIs.
+    expected_agent_id: django-api-developer
+    excluded_alternatives:
+      - django-backend-expert
+      - api-architect
+    approval_policy: AP-B
+    contract_id: django-api-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: django-orm-bottleneck
+    kind: routing
+    request: Optimize Django ORM queries and indexes for a hot list endpoint.
+    expected_agent_id: django-orm-expert
+    excluded_alternatives:
+      - django-backend-expert
+      - performance-optimizer
+    approval_policy: AP-B
+    contract_id: django-orm-optimization-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: rails-api-endpoints
+    kind: routing
+    request: Build Rails JSON API endpoints with versioning, auth, and serializer error handling.
+    expected_agent_id: rails-api-developer
+    excluded_alternatives:
+      - rails-backend-expert
+    approval_policy: AP-B
+    contract_id: rails-api-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: eloquent-destructive-migration
+    kind: routing
+    request: Apply a destructive Laravel migration rewriting production payment tables.
+    expected_agent_id: laravel-eloquent-expert
+    excluded_alternatives: []
+    approval_policy: AP-B
+    contract_id: eloquent-work-summary-v1
+    surface_mode: ide-subagent
+    expected_status: needs-approval
+
+  - id: laravel-backend-delivery
+    agent_id: laravel-backend-expert
+    handoff:
+      handoff_version: 1
+      contract_id: laravel-implementation-v1
+      status: completed
+      summary: Laravel billing workflow implementation.
+      artifact_paths:
+        - app/Http/Controllers/BillingController.php
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        architecture: Service layer with form requests and policies
+        files:
+          - app/Http/Controllers/BillingController.php
+        database_ui_integration: Eloquent models wired to Blade dashboards
+        dependencies_tests_docs: Pest feature tests and README billing notes added
+
+  - id: eloquent-work-summary
+    agent_id: laravel-eloquent-expert
+    handoff:
+      handoff_version: 1
+      contract_id: eloquent-work-summary-v1
+      status: needs-approval
+      summary: Destructive migration plan for payment tables awaiting approval.
+      artifact_paths:
+        - database/migrations/2026_10_28_rebuild_payments.php
+      routing:
+        recommended_next_agent: null
+        reason: destructive-migration
+        prerequisites:
+          - Explicit approval for destructive-migration risk gate
+      result:
+        models_migrations: Rebuild payments schema with backfill strategy
+        decisions:
+          - Split migration into expand and contract phases after approval
+        evidence: Query plans show sequential scans on legacy indexes
+        next_steps:
+          - Obtain approval before running migration in staging
+
+  - id: django-backend-delivery
+    agent_id: django-backend-expert
+    handoff:
+      handoff_version: 1
+      contract_id: django-backend-implementation-v1
+      status: completed
+      summary: Focused Django backend feature delivery.
+      artifact_paths:
+        - apps/billing/services.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        components:
+          - billing services
+        features: Background reconciliation job for invoices
+        integration: Celery task registered in existing worker app
+        next_work: Add admin reporting filters
+        files:
+          - apps/billing/services.py
+
+  - id: django-api-delivery
+    agent_id: django-api-developer
+    handoff:
+      handoff_version: 1
+      contract_id: django-api-implementation-v1
+      status: completed
+      summary: DRF inventory API endpoints.
+      artifact_paths:
+        - apps/inventory/api/views.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        endpoints:
+          - GET /api/inventory/
+          - POST /api/inventory/
+        auth: Session and token permissions aligned with project defaults
+        serializers: Nested serializer for warehouse relations
+        docs_tests: OpenAPI schema fragment and pytest API tests
+        integration_performance: Pagination tuned for large catalogs
+        files:
+          - apps/inventory/api/views.py
+
+  - id: django-orm-report
+    agent_id: django-orm-expert
+    handoff:
+      handoff_version: 1
+      contract_id: django-orm-optimization-v1
+      status: completed
+      summary: ORM optimization for inventory list endpoint.
+      artifact_paths:
+        - apps/inventory/models.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        metrics: Query count reduced from 42 to 3 on sample dataset
+        database_code_changes: Added select_related and composite index migration plan
+        impact: P95 list latency improved on staging traces
+        monitoring: Added slow query logging hook
+        recommendations:
+          - Schedule destructive index migration only with explicit approval
+        files:
+          - apps/inventory/models.py
+
+  - id: rails-backend-delivery
+    agent_id: rails-backend-expert
+    handoff:
+      handoff_version: 1
+      contract_id: rails-backend-implementation-v1
+      status: completed
+      summary: Rails backend feature for subscription renewals.
+      artifact_paths:
+        - app/services/subscription_renewal.rb
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        components:
+          - SubscriptionRenewal service
+        features: Renewal scheduling with idempotent job enqueue
+        integrations:
+          - Sidekiq worker
+        gems:
+          - sidekiq
+        next_steps:
+          - Add system tests for renewal edge cases
+        files:
+          - app/services/subscription_renewal.rb
+
+  - id: rails-api-delivery
+    agent_id: rails-api-developer
+    handoff:
+      handoff_version: 1
+      contract_id: rails-api-implementation-v1
+      status: completed
+      summary: Rails JSON API for subscriptions.
+      artifact_paths:
+        - app/controllers/api/v1/subscriptions_controller.rb
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        endpoints_versioning: Versioned routes under /api/v1/subscriptions
+        security: Doorkeeper scopes enforced on mutating actions
+        serialization_errors: ActiveModelSerializers errors mapped to RFC7807-style payloads
+        docs_tests: Request specs cover happy and failure paths
+        integration: Webhook callbacks documented for billing provider
+        files:
+          - app/controllers/api/v1/subscriptions_controller.rb
+
+  - id: rails-activerecord-report
+    agent_id: rails-activerecord-expert
+    handoff:
+      handoff_version: 1
+      contract_id: rails-activerecord-optimization-v1
+      status: completed
+      summary: ActiveRecord optimization for subscription lookups.
+      artifact_paths:
+        - app/models/subscription.rb
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        metrics: Reduced queries on dashboard from 18 to 2
+        database_ar_changes: Added includes and partial index recommendation
+        impact: Lower DB time on staging dashboard load test
+        recommendations:
+          - Apply destructive migration only after explicit approval
+        files:
+          - app/models/subscription.rb
