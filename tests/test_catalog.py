@@ -126,6 +126,7 @@ def test_repository_catalog_has_strict_task_one_skeleton():
     assert [procedure.id for procedure in catalog.procedures] == [
         f"PROC-{index:02d}" for index in range(21)
     ]
-    assert catalog.contracts == {}
+    assert len(catalog.contracts) == 33
+    assert "stack-analysis-v1" in catalog.contracts
     assert catalog.instructions.repository.as_posix() == "src/instructions/copilot.md"
     assert catalog.instructions.path_specific == ()

@@ -1,0 +1,1381 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesome-copilot-agents.example/schemas/result-contracts.schema.json",
+  "$defs": {
+    "route-plan-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_summary",
+        "assumptions",
+        "slices",
+        "concurrency_groups",
+        "allowed_agent_whitelist",
+        "excluded_alternatives",
+        "approval_checkpoint_state",
+        "surface_execution_mode",
+        "cloud_session_instructions",
+        "completion_gate",
+        "unresolved_prerequisites"
+      ],
+      "properties": {
+        "request_summary": {
+          "type": "string"
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent_id",
+              "objective",
+              "inputs",
+              "contract_id",
+              "dependencies",
+              "artifact_paths"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "objective": {
+                "type": "string"
+              },
+              "inputs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "contract_id": {
+                "type": "string"
+              },
+              "dependencies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "artifact_paths": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "concurrency_groups": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
+          }
+        },
+        "allowed_agent_whitelist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excluded_alternatives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "approval_checkpoint_state": {
+          "enum": [
+            "pending",
+            "approved",
+            "revised",
+            "stopped"
+          ]
+        },
+        "surface_execution_mode": {
+          "enum": [
+            "ide-subagent",
+            "cli-delegation",
+            "cloud-separate-session"
+          ]
+        },
+        "cloud_session_instructions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent_id",
+              "instructions",
+              "context_payload"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "instructions": {
+                "type": "string"
+              },
+              "context_payload": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "completion_gate": {
+          "type": "string"
+        },
+        "unresolved_prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subagent_executed": {
+          "type": "boolean"
+        },
+        "delegation_executed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "stack-analysis-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stack",
+        "architecture",
+        "confidence",
+        "findings",
+        "contradictions",
+        "unknowns",
+        "recommendations"
+      ],
+      "properties": {
+        "stack": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "architecture": {
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "summary",
+              "evidence"
+            ],
+            "properties": {
+              "summary": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "team-configuration-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stack",
+        "selected_agents"
+      ],
+      "properties": {
+        "stack": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selected_agents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent_id",
+              "reason"
+            ],
+            "properties": {
+              "agent_id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "codebase-assessment-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sections",
+        "confidence",
+        "recommendations"
+      ],
+      "properties": {
+        "sections": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 11,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "summary"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "code-review-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "grades",
+        "severities",
+        "positives",
+        "findings",
+        "checklist",
+        "disposition"
+      ],
+      "properties": {
+        "grades": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "severities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "positives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "summary",
+              "evidence"
+            ],
+            "properties": {
+              "summary": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "checklist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disposition": {
+          "enum": [
+            "PASS",
+            "BLOCK"
+          ]
+        }
+      }
+    },
+    "documentation-changelog-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifacts",
+        "summaries"
+      ],
+      "properties": {
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summaries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "performance-report-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseline",
+        "bottleneck",
+        "before_after_delta",
+        "recommendations"
+      ],
+      "properties": {
+        "baseline": {
+          "type": "string"
+        },
+        "bottleneck": {
+          "type": "string"
+        },
+        "before_after_delta": {
+          "type": "string"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "api-design-report-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact",
+        "decisions",
+        "questions",
+        "validation",
+        "implementer_steps"
+      ],
+      "properties": {
+        "artifact": {
+          "type": "string"
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation": {
+          "type": "string"
+        },
+        "implementer_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "backend-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stack",
+        "files",
+        "endpoints",
+        "design",
+        "migrations_security",
+        "tests",
+        "performance"
+      ],
+      "properties": {
+        "stack": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "design": {
+          "type": "string"
+        },
+        "migrations_security": {
+          "type": "string"
+        },
+        "tests": {
+          "type": "string"
+        },
+        "performance": {
+          "type": "string"
+        }
+      }
+    },
+    "frontend-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "framework",
+        "components",
+        "responsiveness",
+        "accessibility",
+        "files",
+        "next_steps"
+      ],
+      "properties": {
+        "framework": {
+          "type": "string"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "responsiveness": {
+          "type": "string"
+        },
+        "accessibility": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "component-delivery-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "files",
+        "visual_artifact",
+        "checklist",
+        "next_steps"
+      ],
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "visual_artifact": {
+          "type": "string"
+        },
+        "checklist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requires_visual_capability": {
+          "type": "boolean"
+        },
+        "requires_mcp_capability": {
+          "type": "boolean"
+        },
+        "unavailable_evidence": {
+          "type": "string"
+        }
+      }
+    },
+    "laravel-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "architecture",
+        "files",
+        "database_ui_integration",
+        "dependencies_tests_docs"
+      ],
+      "properties": {
+        "architecture": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "database_ui_integration": {
+          "type": "string"
+        },
+        "dependencies_tests_docs": {
+          "type": "string"
+        }
+      }
+    },
+    "eloquent-work-summary-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "models_migrations",
+        "decisions",
+        "evidence",
+        "next_steps"
+      ],
+      "properties": {
+        "models_migrations": {
+          "type": "string"
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "django-backend-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "components",
+        "features",
+        "integration",
+        "next_work",
+        "files"
+      ],
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "features": {
+          "type": "string"
+        },
+        "integration": {
+          "type": "string"
+        },
+        "next_work": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "django-api-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoints",
+        "auth",
+        "serializers",
+        "docs_tests",
+        "integration_performance",
+        "files"
+      ],
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "type": "string"
+        },
+        "serializers": {
+          "type": "string"
+        },
+        "docs_tests": {
+          "type": "string"
+        },
+        "integration_performance": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "django-orm-optimization-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metrics",
+        "database_code_changes",
+        "impact",
+        "monitoring",
+        "recommendations",
+        "files"
+      ],
+      "properties": {
+        "metrics": {
+          "type": "string"
+        },
+        "database_code_changes": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "string"
+        },
+        "monitoring": {
+          "type": "string"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "django-fullstack-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apps_models_views",
+        "architecture",
+        "ui_admin",
+        "apis_jobs",
+        "files"
+      ],
+      "properties": {
+        "apps_models_views": {
+          "type": "string"
+        },
+        "architecture": {
+          "type": "string"
+        },
+        "ui_admin": {
+          "type": "string"
+        },
+        "apis_jobs": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rails-backend-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "components",
+        "features",
+        "integrations",
+        "gems",
+        "next_steps",
+        "files"
+      ],
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "features": {
+          "type": "string"
+        },
+        "integrations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rails-api-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoints_versioning",
+        "security",
+        "serialization_errors",
+        "docs_tests",
+        "integration",
+        "files"
+      ],
+      "properties": {
+        "endpoints_versioning": {
+          "type": "string"
+        },
+        "security": {
+          "type": "string"
+        },
+        "serialization_errors": {
+          "type": "string"
+        },
+        "docs_tests": {
+          "type": "string"
+        },
+        "integration": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rails-activerecord-optimization-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metrics",
+        "database_ar_changes",
+        "impact",
+        "recommendations",
+        "files"
+      ],
+      "properties": {
+        "metrics": {
+          "type": "string"
+        },
+        "database_ar_changes": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "string"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "react-component-delivery-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundaries",
+        "server_client_choice",
+        "accessibility",
+        "tests_stories",
+        "performance",
+        "files"
+      ],
+      "properties": {
+        "boundaries": {
+          "type": "string"
+        },
+        "server_client_choice": {
+          "type": "string"
+        },
+        "accessibility": {
+          "type": "string"
+        },
+        "tests_stories": {
+          "type": "string"
+        },
+        "performance": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "nextjs-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rendering_router",
+        "features",
+        "performance",
+        "seo",
+        "integration",
+        "files"
+      ],
+      "properties": {
+        "rendering_router": {
+          "type": "string"
+        },
+        "features": {
+          "type": "string"
+        },
+        "performance": {
+          "type": "string"
+        },
+        "seo": {
+          "type": "string"
+        },
+        "integration": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "vue-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "components",
+        "patterns",
+        "performance",
+        "state_router_impact",
+        "next_steps"
+      ],
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "patterns": {
+          "type": "string"
+        },
+        "performance": {
+          "type": "string"
+        },
+        "state_router_impact": {
+          "type": "string"
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "nuxt-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "architecture",
+        "features",
+        "performance",
+        "seo",
+        "integrations",
+        "files"
+      ],
+      "properties": {
+        "architecture": {
+          "type": "string"
+        },
+        "features": {
+          "type": "string"
+        },
+        "performance": {
+          "type": "string"
+        },
+        "seo": {
+          "type": "string"
+        },
+        "integrations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "vue-state-delivery-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stores_actions_getters",
+        "flow",
+        "persistence_hydration",
+        "migration",
+        "consumers",
+        "tests",
+        "files"
+      ],
+      "properties": {
+        "stores_actions_getters": {
+          "type": "string"
+        },
+        "flow": {
+          "type": "string"
+        },
+        "persistence_hydration": {
+          "type": "string"
+        },
+        "migration": {
+          "type": "string"
+        },
+        "consumers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tests": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "python-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "components",
+        "features",
+        "integration",
+        "dependencies",
+        "next_steps",
+        "files"
+      ],
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "features": {
+          "type": "string"
+        },
+        "integration": {
+          "type": "string"
+        },
+        "dependencies": {
+          "type": "string"
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "fastapi-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apis",
+        "schemas_auth",
+        "architecture",
+        "performance_security",
+        "openapi",
+        "files"
+      ],
+      "properties": {
+        "apis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schemas_auth": {
+          "type": "string"
+        },
+        "architecture": {
+          "type": "string"
+        },
+        "performance_security": {
+          "type": "string"
+        },
+        "openapi": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ml-data-implementation-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "problem_model_metrics",
+        "pipeline",
+        "training",
+        "production",
+        "visualization",
+        "files"
+      ],
+      "properties": {
+        "problem_model_metrics": {
+          "type": "string"
+        },
+        "pipeline": {
+          "type": "string"
+        },
+        "training": {
+          "type": "string"
+        },
+        "production": {
+          "type": "string"
+        },
+        "visualization": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "python-deployment-delivery-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pipeline",
+        "deployment",
+        "rollback",
+        "credentials_gates",
+        "files"
+      ],
+      "properties": {
+        "pipeline": {
+          "type": "string"
+        },
+        "deployment": {
+          "type": "string"
+        },
+        "rollback": {
+          "type": "string"
+        },
+        "credentials_gates": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "python-performance-report-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workload",
+        "profiler_evidence",
+        "before_after",
+        "regression_disposition"
+      ],
+      "properties": {
+        "workload": {
+          "type": "string"
+        },
+        "profiler_evidence": {
+          "type": "string"
+        },
+        "before_after": {
+          "type": "string"
+        },
+        "regression_disposition": {
+          "type": "string"
+        }
+      }
+    },
+    "python-security-assessment-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "assets",
+        "threats",
+        "severity",
+        "evidence",
+        "controls",
+        "remediation",
+        "verification",
+        "disposition"
+      ],
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "severity": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remediation": {
+          "type": "string"
+        },
+        "verification": {
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "PASS",
+            "BLOCK"
+          ]
+        }
+      }
+    },
+    "python-testing-delivery-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk_map",
+        "layers",
+        "fixtures",
+        "files",
+        "commands_evidence",
+        "coverage_mutation",
+        "gaps"
+      ],
+      "properties": {
+        "risk_map": {
+          "type": "string"
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fixtures": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commands_evidence": {
+          "type": "string"
+        },
+        "coverage_mutation": {
+          "type": "string"
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "python-acquisition-report-v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorization",
+        "source_api_preference",
+        "robots_terms_rate_controls",
+        "schema",
+        "validation",
+        "lineage"
+      ],
+      "properties": {
+        "authorization": {
+          "type": "string"
+        },
+        "source_api_preference": {
+          "type": "string"
+        },
+        "robots_terms_rate_controls": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "validation": {
+          "type": "string"
+        },
+        "lineage": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

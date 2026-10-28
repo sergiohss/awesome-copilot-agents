@@ -50,9 +50,10 @@ def minimal_catalog_tree() -> Callable[..., None]:
     ) -> None:
         catalog_dir = root / "src/catalog"
         schema_dir = root / "src/schemas"
-        catalog_dir.mkdir(parents=True)
-        schema_dir.mkdir(parents=True)
+        catalog_dir.mkdir(parents=True, exist_ok=True)
+        schema_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(PROJECT_ROOT / "src/schemas/catalog.schema.json", schema_dir)
+        shutil.copy2(PROJECT_ROOT / "src/catalog/contracts.yaml", catalog_dir / "contracts.yaml")
 
         agent = {
             "id": "project-analyst",
@@ -81,7 +82,6 @@ def minimal_catalog_tree() -> Callable[..., None]:
                     }
                 ]
             },
-            "contracts.yaml": {"contracts": {"stack-analysis-v1": "Stack analysis result"}},
             "instructions.yaml": {
                 "repository": "src/instructions/copilot.md",
                 "path_specific": path_specific if path_specific is not None else [],

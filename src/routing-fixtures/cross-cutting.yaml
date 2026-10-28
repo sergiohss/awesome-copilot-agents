@@ -1,0 +1,86 @@
+fixtures:
+  - id: cloud-route-plan-valid
+    agent_id: tech-lead-orchestrator
+    handoff:
+      handoff_version: 1
+      contract_id: route-plan-v1
+      status: completed
+      summary: Multi-slice architecture plan for cloud execution.
+      artifact_paths: []
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        request_summary: Split backend and frontend modernization
+        assumptions:
+          - Existing FastAPI backend remains authoritative
+        slices:
+          - agent_id: fastapi-expert
+            objective: Harden API layer
+            inputs:
+              - pyproject.toml
+            contract_id: fastapi-implementation-v1
+            dependencies: []
+            artifact_paths: []
+        concurrency_groups:
+          - - fastapi-expert
+        allowed_agent_whitelist:
+          - fastapi-expert
+        excluded_alternatives:
+          - tech-lead-orchestrator
+        approval_checkpoint_state: approved
+        surface_execution_mode: cloud-separate-session
+        cloud_session_instructions:
+          - agent_id: fastapi-expert
+            instructions: Continue API hardening in a new session
+            context_payload: handoff-artifacts/route-plan.json
+        completion_gate: Review hardened API before frontend work
+        unresolved_prerequisites: []
+
+  - id: cloud-route-plan-execution-claim
+    agent_id: tech-lead-orchestrator
+    mutate:
+      result.subagent_executed: true
+
+  - id: unavailable-visual-requires-evidence
+    agent_id: tailwind-css-expert
+    handoff:
+      handoff_version: 1
+      contract_id: component-delivery-v1
+      status: completed
+      summary: Tailwind component delivery without live browser.
+      artifact_paths: []
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        files:
+          - src/components/Button.tsx
+        visual_artifact: docs/ui/button-preview.md
+        checklist:
+          - responsive verified locally
+        next_steps:
+          - run Storybook when available
+        requires_visual_capability: true
+
+  - id: unavailable-visual-blocked
+    agent_id: tailwind-css-expert
+    handoff:
+      handoff_version: 1
+      contract_id: component-delivery-v1
+      status: blocked
+      summary: Visual verification blocked without browser capability.
+      artifact_paths: []
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        files: []
+        visual_artifact: docs/ui/button-preview.md
+        checklist: []
+        next_steps: []
+        requires_visual_capability: true
+        unavailable_evidence: Browser capability unavailable on this surface

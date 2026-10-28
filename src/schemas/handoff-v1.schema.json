@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesome-copilot-agents.example/schemas/handoff-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "handoff_version",
+    "contract_id",
+    "status",
+    "summary",
+    "artifact_paths",
+    "routing",
+    "result"
+  ],
+  "properties": {
+    "handoff_version": {"const": 1},
+    "contract_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "status": {"enum": ["completed", "blocked", "needs-approval"]},
+    "summary": {"type": "string", "minLength": 1},
+    "artifact_paths": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recommended_next_agent", "reason", "prerequisites"],
+      "properties": {
+        "recommended_next_agent": {
+          "type": ["string", "null"],
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "reason": {"type": ["string", "null"]},
+        "prerequisites": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "result": {"type": "object"}
+  }
+}

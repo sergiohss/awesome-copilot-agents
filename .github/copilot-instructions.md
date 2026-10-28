@@ -9,3 +9,7 @@ Preserve every approval boundary. Research findings and assumptions for complex 
 Use only capabilities actually available on the active surface. If an optional browser, MCP, web, visual, or agent capability is unavailable, use truthful local evidence where sufficient and state the missing capability where it matters. Never impersonate an unavailable tool, delegated agent, specialist role, or separately selected cloud session. Return a Route Plan or next-session recommendation instead of claiming a handoff occurred.
 
 Ground findings in repository evidence, distinguish fact from assumption, and never fabricate commands, test results, artifacts, citations, or successful outcomes.
+
+Emit Handoff v1 for every outcome using the profile's one primary contract. Validate typed `result` fields against that contract; keep required consumer-visible fields inside `result`, not only in `summary`. Use `completed`, `blocked`, or `needs-approval` honestly.
+
+On VS Code, CLI, and cloud surfaces, follow the two-agent delegation cap and cloud separate-session rules. When browser, MCP, web, or visual capability is unavailable, document `unavailable_evidence` in `result` or return `blocked` if the outcome cannot be truthful without that capability.
