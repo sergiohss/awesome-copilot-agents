@@ -1,0 +1,41 @@
+upstream_repository: https://github.com/vijaythecoder/awesome-claude-agents.git
+upstream_commit: 2050f3c60fcfea497f7b6b3ec6566cc316367a7e
+source_path: agents/specialized/python/web-scraping-expert.md
+source_blob_sha256: f3718efbb062be53ce3f2f06acc76f6af25e0d5d770605b8cc63db30966bd397
+source_dispositions:
+- kind: source-derived
+  source_range:
+    start_line: 1
+    end_line: 1498
+  destination:
+    type: profile
+    id: python-web-scraping-expert
+  semantic_status: retained
+- kind: source-derived
+  source_range:
+    start_line: 1499
+    end_line: 1534
+  destination:
+    type: omission-record
+    id: python-acquisition-unsafe-range
+  semantic_status: omitted-for-safety
+- kind: source-derived
+  source_range:
+    start_line: 1535
+    end_line: 1536
+  destination:
+    type: skill
+    id: aca-authorized-scraping-pipeline
+  semantic_status: corrected
+source_license_spdx: MIT
+source_license_sha256: 6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa
+source_attribution: Copyright (c) 2024 Awesome Claude Agents Contributors
+adaptation_version: 0.1.0-design.1
+target_id: python-web-scraping-expert
+target_contract_id: python-acquisition-report-v1
+procedure_ids:
+- PROC-19
+skill_names:
+- aca-authorized-scraping-pipeline
+resource_destinations: []
+approval_record: null

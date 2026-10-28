@@ -1,0 +1,34 @@
+upstream_repository: https://github.com/vijaythecoder/awesome-claude-agents.git
+upstream_commit: 2050f3c60fcfea497f7b6b3ec6566cc316367a7e
+source_path: agents/specialized/vue/vue-state-manager.md
+source_blob_sha256: 7f0dea3b44c7ea95a5ea1d7084b9cdf3fc59892bf627217ca6cece6c902dec2c
+source_dispositions:
+- kind: source-derived
+  source_range:
+    start_line: 1
+    end_line: 33
+  destination:
+    type: profile
+    id: vue-component-architect
+  semantic_status: consolidated
+- kind: additive
+  source_range: null
+  destination:
+    type: profile
+    id: vue-state-manager
+  semantic_status: additive
+  design_authority: VUE-03-SEMANTIC-REPAIR
+source_license_spdx: MIT
+source_license_sha256: 6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa
+source_attribution: Copyright (c) 2024 Awesome Claude Agents Contributors
+adaptation_version: 0.1.0-design.1
+target_id: vue-state-manager
+target_contract_id: vue-state-delivery-v1
+procedure_ids:
+- PROC-06
+- PROC-07
+skill_names:
+- aca-version-aware-official-docs
+- aca-existing-convention-scan
+resource_destinations: []
+approval_record: VUE-03-SEMANTIC-REPAIR

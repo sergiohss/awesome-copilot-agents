@@ -1,0 +1,27 @@
+upstream_repository: https://github.com/vijaythecoder/awesome-claude-agents.git
+upstream_commit: 2050f3c60fcfea497f7b6b3ec6566cc316367a7e
+source_path: agents/universal/tailwind-css-expert.md
+source_blob_sha256: f869559fa22d3f299d3ed8219e79df7acd7c0d4bc129e1e83af33f24d53eed94
+source_dispositions:
+- kind: source-derived
+  source_range:
+    start_line: 1
+    end_line: 84
+  destination:
+    type: profile
+    id: tailwind-css-expert
+  semantic_status: corrected
+source_license_spdx: MIT
+source_license_sha256: 6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa
+source_attribution: Copyright (c) 2024 Awesome Claude Agents Contributors
+adaptation_version: 0.1.0-design.1
+target_id: tailwind-css-expert
+target_contract_id: component-delivery-v1
+procedure_ids:
+- PROC-06
+- PROC-14
+skill_names:
+- aca-version-aware-official-docs
+- aca-accessible-ui-delivery
+resource_destinations: []
+approval_record: null

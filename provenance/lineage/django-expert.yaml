@@ -1,0 +1,29 @@
+upstream_repository: https://github.com/vijaythecoder/awesome-claude-agents.git
+upstream_commit: 2050f3c60fcfea497f7b6b3ec6566cc316367a7e
+source_path: agents/specialized/python/django-expert.md
+source_blob_sha256: 77fb05047aa4b2e0a7a522710c67730041db8e32192e81321f1fecf3345c5046
+source_dispositions:
+- kind: source-derived
+  source_range:
+    start_line: 1
+    end_line: 1508
+  destination:
+    type: profile
+    id: django-expert
+  semantic_status: translated
+source_license_spdx: MIT
+source_license_sha256: 6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa
+source_attribution: Copyright (c) 2024 Awesome Claude Agents Contributors
+adaptation_version: 0.1.0-design.1
+target_id: django-expert
+target_contract_id: django-fullstack-implementation-v1
+procedure_ids:
+- PROC-06
+- PROC-07
+- PROC-09
+skill_names:
+- aca-version-aware-official-docs
+- aca-existing-convention-scan
+- aca-structured-implementation-handoff
+resource_destinations: []
+approval_record: null

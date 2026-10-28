@@ -1,0 +1,29 @@
+upstream_repository: https://github.com/vijaythecoder/awesome-claude-agents.git
+upstream_commit: 2050f3c60fcfea497f7b6b3ec6566cc316367a7e
+source_path: agents/specialized/django/django-backend-expert.md
+source_blob_sha256: f84587c6af09f3a82d32302367d17e3f211d844bb4d13470d4ffaa67e80e1b3f
+source_dispositions:
+- kind: source-derived
+  source_range:
+    start_line: 1
+    end_line: 875
+  destination:
+    type: profile
+    id: django-backend-expert
+  semantic_status: retained
+source_license_spdx: MIT
+source_license_sha256: 6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa
+source_attribution: Copyright (c) 2024 Awesome Claude Agents Contributors
+adaptation_version: 0.1.0-design.1
+target_id: django-backend-expert
+target_contract_id: django-backend-implementation-v1
+procedure_ids:
+- PROC-06
+- PROC-07
+- PROC-09
+skill_names:
+- aca-version-aware-official-docs
+- aca-existing-convention-scan
+- aca-structured-implementation-handoff
+resource_destinations: []
+approval_record: null

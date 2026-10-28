@@ -1,0 +1,27 @@
+upstream_repository: https://github.com/vijaythecoder/awesome-claude-agents.git
+upstream_commit: 2050f3c60fcfea497f7b6b3ec6566cc316367a7e
+source_path: agents/orchestrators/project-analyst.md
+source_blob_sha256: 5f0e2fa3f42f0b733d7c6714464f49111cf89eea009630e2f6f49d02b2c1ef62
+source_dispositions:
+- kind: source-derived
+  source_range:
+    start_line: 1
+    end_line: 66
+  destination:
+    type: profile
+    id: project-analyst
+  semantic_status: retained
+source_license_spdx: MIT
+source_license_sha256: 6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa
+source_attribution: Copyright (c) 2024 Awesome Claude Agents Contributors
+adaptation_version: 0.1.0-design.1
+target_id: project-analyst
+target_contract_id: stack-analysis-v1
+procedure_ids:
+- PROC-01
+- PROC-02
+skill_names:
+- aca-inventory-first-discovery
+- aca-stack-detection-with-confidence
+resource_destinations: []
+approval_record: null

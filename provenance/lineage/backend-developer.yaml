@@ -1,0 +1,29 @@
+upstream_repository: https://github.com/vijaythecoder/awesome-claude-agents.git
+upstream_commit: 2050f3c60fcfea497f7b6b3ec6566cc316367a7e
+source_path: agents/universal/backend-developer.md
+source_blob_sha256: 4b5674408432d6059a0181d2b2ed3e000edefd854b4d6b97a95594784fc31920
+source_dispositions:
+- kind: source-derived
+  source_range:
+    start_line: 1
+    end_line: 95
+  destination:
+    type: profile
+    id: backend-developer
+  semantic_status: retained
+source_license_spdx: MIT
+source_license_sha256: 6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa
+source_attribution: Copyright (c) 2024 Awesome Claude Agents Contributors
+adaptation_version: 0.1.0-design.1
+target_id: backend-developer
+target_contract_id: backend-implementation-v1
+procedure_ids:
+- PROC-05
+- PROC-07
+- PROC-09
+skill_names:
+- aca-specialist-first-selection
+- aca-existing-convention-scan
+- aca-structured-implementation-handoff
+resource_destinations: []
+approval_record: null

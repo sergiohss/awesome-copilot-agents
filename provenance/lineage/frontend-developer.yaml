@@ -1,0 +1,31 @@
+upstream_repository: https://github.com/vijaythecoder/awesome-claude-agents.git
+upstream_commit: 2050f3c60fcfea497f7b6b3ec6566cc316367a7e
+source_path: agents/universal/frontend-developer.md
+source_blob_sha256: 34d83ac414ddd224776286aca13216991d028051e833c75345c898c066e41555
+source_dispositions:
+- kind: source-derived
+  source_range:
+    start_line: 1
+    end_line: 66
+  destination:
+    type: profile
+    id: frontend-developer
+  semantic_status: retained
+source_license_spdx: MIT
+source_license_sha256: 6196817dde51dca830403aff706e50aa9929e53a80dc38a1b1636c5926574daa
+source_attribution: Copyright (c) 2024 Awesome Claude Agents Contributors
+adaptation_version: 0.1.0-design.1
+target_id: frontend-developer
+target_contract_id: frontend-implementation-v1
+procedure_ids:
+- PROC-05
+- PROC-07
+- PROC-09
+- PROC-14
+skill_names:
+- aca-specialist-first-selection
+- aca-existing-convention-scan
+- aca-structured-implementation-handoff
+- aca-accessible-ui-delivery
+resource_destinations: []
+approval_record: null

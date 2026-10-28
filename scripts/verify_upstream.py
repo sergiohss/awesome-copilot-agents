@@ -12,7 +12,7 @@ import unicodedata
 from typing import Any
 
 from aca_tools.errors import ValidationError
-from aca_tools.provenance import SourceBaseline, load_baseline, verify_upstream
+from aca_tools.provenance import SourceBaseline, load_baseline, verify_lineages, verify_upstream
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -126,7 +126,13 @@ def main() -> int:
         description="Verify the immutable Awesome Claude Agents source authority."
     )
     parser.add_argument("--source-root", required=True, type=Path)
-    mode = parser.add_mutually_exclusive_group(required=True)
+    parser.add_argument(
+        "--distribution-root",
+        type=Path,
+        default=ROOT,
+        help="awesome-copilot-agents root for lineage validation",
+    )
+    mode = parser.add_mutually_exclusive_group(required=False)
     mode.add_argument("--record-baseline", action="store_true")
     mode.add_argument("--baseline-only", action="store_true")
     arguments = parser.parse_args()
@@ -137,6 +143,13 @@ def main() -> int:
             _record_baseline(arguments.source_root, baseline)
             baseline = load_baseline(ROOT)
         report = verify_upstream(arguments.source_root, baseline)
+        if not arguments.baseline_only:
+            lineage_issues = verify_lineages(arguments.distribution_root, baseline)
+            if lineage_issues:
+                print("FAIL: lineage validation failed", file=sys.stderr)
+                for issue in lineage_issues:
+                    print(f"- {issue}", file=sys.stderr)
+                return 1
     except ValidationError as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1
