@@ -141,6 +141,11 @@ def test_repository_catalog_has_orchestrator_core_and_universal_agents():
         "rails-backend-expert",
         "rails-api-developer",
         "rails-activerecord-expert",
+        "react-component-architect",
+        "react-nextjs-expert",
+        "vue-component-architect",
+        "vue-nuxt-expert",
+        "vue-state-manager",
     }
     assert len(catalog.procedures) == 21
     assert [procedure.id for procedure in catalog.procedures] == [

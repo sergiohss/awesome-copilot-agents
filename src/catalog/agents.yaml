@@ -302,3 +302,83 @@ agents:
       - src/fragments/approval-bounded-request-is-authorization.md
       - src/fragments/handoff-v1.md
       - src/fragments/surface-fallback.md
+
+  - id: react-component-architect
+    description: React component and hooks architect for reusable UI, design-system integration, and accessible delivery. Returns react-component-delivery-v1 with boundaries, server/client choice, accessibility, tests/stories, performance, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D, V]
+    contract_id: react-component-delivery-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09, PROC-14]
+    profile: src/profiles/react-component-architect.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: react-nextjs-expert
+    description: Next.js framework specialist for App Router rendering, caching, SEO, Server Actions, and integration. Returns nextjs-implementation-v1 with rendering/router, features, performance, SEO, integration, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D, V]
+    contract_id: nextjs-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09, PROC-14]
+    profile: src/profiles/react-nextjs-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: vue-component-architect
+    description: Vue 3 component and composable architect for Composition API delivery. Returns vue-implementation-v1 with components, patterns, performance, state/router impact, and next steps.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D, V]
+    contract_id: vue-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09, PROC-14]
+    profile: src/profiles/vue-component-architect.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: vue-nuxt-expert
+    description: Nuxt 3 and Nitro specialist for SSR, server routes, modules, and SEO. Returns nuxt-implementation-v1 with architecture, features, performance, SEO, integrations, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D, V]
+    contract_id: nuxt-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09, PROC-14]
+    profile: src/profiles/vue-nuxt-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: vue-state-manager
+    description: Pinia and Vuex state specialist under VUE-03-SEMANTIC-REPAIR for store boundaries, persistence, SSR hydration, and migration. Returns vue-state-delivery-v1 with stores/actions/getters, flow, persistence/hydration, migration, consumers, tests, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: vue-state-delivery-v1
+    procedure_ids: [PROC-06, PROC-07]
+    profile: src/profiles/vue-state-manager.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md

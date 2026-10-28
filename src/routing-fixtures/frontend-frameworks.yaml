@@ -1,0 +1,176 @@
+fixtures:
+  - id: react-hooks-component-library
+    kind: routing
+    request: Build reusable React hooks and accessible components with Storybook coverage.
+    expected_agent_id: react-component-architect
+    excluded_alternatives:
+      - react-nextjs-expert
+      - frontend-developer
+    approval_policy: AP-B
+    contract_id: react-component-delivery-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: next-app-router-cache
+    kind: routing
+    request: Configure Next.js App Router caching, ISR revalidation, and Server Actions for checkout.
+    expected_agent_id: react-nextjs-expert
+    excluded_alternatives:
+      - react-component-architect
+      - frontend-developer
+    approval_policy: AP-B
+    contract_id: nextjs-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: vue-composable-components
+    kind: routing
+    request: Refactor Vue 3 SFCs and composables with script setup and Vitest coverage.
+    expected_agent_id: vue-component-architect
+    excluded_alternatives:
+      - vue-nuxt-expert
+      - vue-state-manager
+      - frontend-developer
+    approval_policy: AP-B
+    contract_id: vue-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: nuxt-nitro-ssr-seo
+    kind: routing
+    request: Add Nuxt 3 Nitro server routes, SSR data fetching, and SEO metadata for marketing pages.
+    expected_agent_id: vue-nuxt-expert
+    excluded_alternatives:
+      - vue-component-architect
+      - frontend-developer
+    approval_policy: AP-B
+    contract_id: nuxt-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: pinia-ssr-hydration
+    kind: routing
+    request: Design Pinia store boundaries with persisted state and SSR hydration for cart checkout.
+    expected_agent_id: vue-state-manager
+    excluded_alternatives:
+      - vue-component-architect
+      - vue-nuxt-expert
+    approval_policy: AP-B
+    contract_id: vue-state-delivery-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: react-component-delivery
+    agent_id: react-component-architect
+    handoff:
+      handoff_version: 1
+      contract_id: react-component-delivery-v1
+      status: completed
+      summary: Reusable React component library with hooks and accessibility tests.
+      artifact_paths:
+        - src/components/DataTable.tsx
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        boundaries: Presentational table isolated from data fetching hooks
+        server_client_choice: Client component for row selection; server wrapper defers fetch to parent
+        accessibility: Keyboard navigation and aria-sort on headers
+        tests_stories: Storybook stories and Testing Library interaction tests
+        performance: Memoized row renderer and virtualized body option documented
+        files:
+          - src/components/DataTable.tsx
+
+  - id: nextjs-implementation-delivery
+    agent_id: react-nextjs-expert
+    handoff:
+      handoff_version: 1
+      contract_id: nextjs-implementation-v1
+      status: completed
+      summary: Next.js checkout route with caching and Server Actions.
+      artifact_paths:
+        - app/checkout/page.tsx
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        rendering_router: App Router segment with dynamic checkout params
+        features: Server Actions for cart mutations and revalidatePath hooks
+        performance: Streaming suspense boundary around payment summary
+        seo: Metadata API title and description for checkout
+        integration: Calls existing REST cart API from server actions
+        files:
+          - app/checkout/page.tsx
+
+  - id: vue-implementation-delivery
+    agent_id: vue-component-architect
+    handoff:
+      handoff_version: 1
+      contract_id: vue-implementation-v1
+      status: completed
+      summary: Vue composables and SFC refactor for product filters.
+      artifact_paths:
+        - src/components/ProductFilters.vue
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        components:
+          - ProductFilters.vue
+          - useProductFilters.ts
+        patterns: script setup with typed props and emits
+        performance: Debounced filter updates and async component for heavy chart
+        state_router_impact: Reads existing Pinia catalog store without redesigning stores
+        next_steps:
+          - Add Vitest coverage for composable edge cases
+
+  - id: nuxt-implementation-delivery
+    agent_id: vue-nuxt-expert
+    handoff:
+      handoff_version: 1
+      contract_id: nuxt-implementation-v1
+      status: completed
+      summary: Nuxt marketing SSR pages with Nitro API routes.
+      artifact_paths:
+        - pages/pricing.vue
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        architecture: SSR pages with server/api/pricing Nitro handler
+        features: useFetch for pricing tiers and server route caching headers
+        performance: Lazy-loaded comparison table component
+        seo: useSeoMeta for pricing landing metadata
+        integrations:
+          - Existing CMS webhook refresh endpoint
+        files:
+          - pages/pricing.vue
+
+  - id: vue-state-delivery
+    agent_id: vue-state-manager
+    handoff:
+      handoff_version: 1
+      contract_id: vue-state-delivery-v1
+      status: completed
+      summary: Pinia cart store with persistence and SSR hydration plan.
+      artifact_paths:
+        - src/stores/cart.ts
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        stores_actions_getters: cart store with addLine, removeLine, and total getter
+        flow: Checkout composable dispatches actions; getters feed summary components
+        persistence_hydration: persistedState plugin with SSR payload merge on client mount
+        migration: Vuex cart module mapping documented for incremental Pinia adoption
+        consumers:
+          - src/components/CartSummary.vue
+          - src/composables/useCheckout.ts
+        tests: Pinia unit tests for actions/getters and hydration fixture
+        files:
+          - src/stores/cart.ts

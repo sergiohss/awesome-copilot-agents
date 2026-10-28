@@ -83,6 +83,16 @@
       "size": 4588
     },
     {
+      "path": ".copilot/agents/react-component-architect.agent.md",
+      "sha256": "c999fc040f46a13edeae8bf48e4fe827e7eb7ec8bb76003f22dae8f972ba4cbb",
+      "size": 4828
+    },
+    {
+      "path": ".copilot/agents/react-nextjs-expert.agent.md",
+      "sha256": "a73aa3b202aed45b8a6708346bb507610431934ee1219eff33dc404817de23dc",
+      "size": 4879
+    },
+    {
       "path": ".copilot/agents/tailwind-css-expert.agent.md",
       "sha256": "39fe96e9329517cb46062df6266c7a45d402af924f8d413ee94580a3061c1e69",
       "size": 4664
@@ -96,6 +106,21 @@
       "path": ".copilot/agents/tech-lead-orchestrator.agent.md",
       "sha256": "7b95d54a1e143b53ca897839bcd380f0587b28c9cbb5abacd270a8bf6ef9d840",
       "size": 4998
+    },
+    {
+      "path": ".copilot/agents/vue-component-architect.agent.md",
+      "sha256": "c27a3f4fd053b7135ca6d7df9f287897773ea2f6b5b2c74b979a78b718b25f06",
+      "size": 4762
+    },
+    {
+      "path": ".copilot/agents/vue-nuxt-expert.agent.md",
+      "sha256": "79163164745606f75fc6ce32ab9ae076cafaddc6b187bd3373ff53435371bb42",
+      "size": 4664
+    },
+    {
+      "path": ".copilot/agents/vue-state-manager.agent.md",
+      "sha256": "ee1ccc61e26c4e48b8e596b9784cffc65b91ce2ab67cc71622963b16f80522f7",
+      "size": 5037
     }
   ],
   "license_spdx": "MIT",

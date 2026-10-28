@@ -83,7 +83,7 @@ PROFILE_SECTIONS = (
     "Result contract",
 )
 
-EXPECTED_PROFILE_COUNT = 19
+EXPECTED_BACKEND_AGENT_IDS = {row[0] for row in BACKEND_FRAMEWORK}
 
 
 @pytest.mark.parametrize("row", BACKEND_FRAMEWORK, ids=[row[0] for row in BACKEND_FRAMEWORK])
@@ -158,11 +158,11 @@ def test_backend_framework_handoff_fixtures_validate():
         validate_handoff(entry["agent_id"], entry["handoff"], catalog)
 
 
-def test_nineteen_profiles_are_generated():
+def test_backend_framework_profiles_are_generated():
     outputs = build_outputs(PROJECT_ROOT)
     generated = {
         path.name.removesuffix(".agent.md")
         for path in outputs
         if path.parts[:2] == (".github", "agents")
     }
-    assert len(generated) == EXPECTED_PROFILE_COUNT
+    assert EXPECTED_BACKEND_AGENT_IDS <= generated
