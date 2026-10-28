@@ -46,3 +46,67 @@ agents:
       - src/fragments/approval-explicit-before-external-side-effect.md
       - src/fragments/handoff-v1.md
       - src/fragments/surface-fallback.md
+
+  - id: code-archaeologist
+    description: Explores legacy or complex codebases and returns codebase-assessment-v1 with eleven evidence-backed sections, confidence, and prioritized recommendations for downstream specialists.
+    tools: [read, search, execute]
+    tool_policy: T-RX
+    approval_policy: AP-R
+    risk_gates: []
+    surfaces: [H]
+    contract_id: codebase-assessment-v1
+    procedure_ids: [PROC-01, PROC-02, PROC-07, PROC-16]
+    profile: src/profiles/code-archaeologist.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-review-only.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: code-reviewer
+    description: Performs read-only, security-aware reviews of completed changes and returns code-review-v1 with severities, evidence, checklist, and PASS or BLOCK disposition without silent remediation.
+    tools: [read, search, execute]
+    tool_policy: T-RX
+    approval_policy: AP-R
+    risk_gates: []
+    surfaces: [H]
+    contract_id: code-review-v1
+    procedure_ids: [PROC-12, PROC-16]
+    profile: src/profiles/code-reviewer.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-review-only.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: documentation-specialist
+    description: Closes documentation gaps for reader-facing artifacts and returns documentation-changelog-v1 with updated paths and concise summaries without claiming API authority over api-architect.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H]
+    contract_id: documentation-changelog-v1
+    procedure_ids: [PROC-13]
+    profile: src/profiles/documentation-specialist.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: performance-optimizer
+    description: Runs cross-stack performance investigations with baseline, profiling, change, and compare lifecycle evidence. Defers exact Django ORM, ActiveRecord, and Python runtime work to narrower specialists.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: [destructive-load-test]
+    surfaces: [H]
+    contract_id: performance-report-v1
+    procedure_ids: [PROC-11]
+    profile: src/profiles/performance-optimizer.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md

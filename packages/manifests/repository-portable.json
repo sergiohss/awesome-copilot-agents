@@ -3,6 +3,26 @@
   "complete": false,
   "files": [
     {
+      "path": ".github/agents/code-archaeologist.agent.md",
+      "sha256": "df8062cbe6698cd7cf1d76c9ba56c289e5fa559af626881878859c3ffa29d0a7",
+      "size": 4817
+    },
+    {
+      "path": ".github/agents/code-reviewer.agent.md",
+      "sha256": "f1ebd3c28c2004bc14732b4f907b6600609081b518f283c8acacd5cb8e9024ce",
+      "size": 4629
+    },
+    {
+      "path": ".github/agents/documentation-specialist.agent.md",
+      "sha256": "574ff6380a6a1d20ed37ae98f23e7407b0b1adcd0485e80899d33ad680f0d3f0",
+      "size": 4563
+    },
+    {
+      "path": ".github/agents/performance-optimizer.agent.md",
+      "sha256": "459bce6df0c9109a8f7cb420e1e84dfae256f091b46f86be2beef73eb68d5ac9",
+      "size": 4714
+    },
+    {
       "path": ".github/agents/project-analyst.agent.md",
       "sha256": "6cae82916141db43d3670c99d5bfbab342277bb69f144d16d5e3bd87e61d2548",
       "size": 4593

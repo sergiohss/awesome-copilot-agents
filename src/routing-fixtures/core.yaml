@@ -1,0 +1,130 @@
+fixtures:
+  - id: django-orm-precedence
+    kind: routing
+    request: Optimize Django ORM queries and migration risk for a hot endpoint.
+    expected_agent_id: django-orm-expert
+    excluded_alternatives:
+      - performance-optimizer
+    approval_policy: AP-B
+    contract_id: django-orm-optimization-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: python-runtime-precedence
+    kind: routing
+    request: Profile Python CPU and memory regressions in asyncio workers.
+    expected_agent_id: python-performance-expert
+    excluded_alternatives:
+      - performance-optimizer
+    approval_policy: AP-B
+    contract_id: python-performance-report-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: code-archaeologist-assessment
+    agent_id: code-archaeologist
+    handoff:
+      handoff_version: 1
+      contract_id: codebase-assessment-v1
+      status: completed
+      summary: Deep assessment for legacy monolith onboarding.
+      artifact_paths:
+        - docs/assessments/codebase-assessment.md
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        sections:
+          - title: Executive Summary
+            summary: Monolith with moderate health score and three top risks.
+          - title: Architecture Overview
+            summary: Layered Django service with Celery workers.
+          - title: Module Map
+            summary: apps/, config/, and worker packages mapped with entry points.
+          - title: Data Layer
+            summary: PostgreSQL with mixed migration history.
+          - title: API Surface
+            summary: REST endpoints under /api with DRF serializers.
+          - title: Quality Signals
+            summary: Partial pytest coverage on core apps.
+          - title: Security Observations
+            summary: Secrets loaded from environment; review auth middleware.
+          - title: Performance Observations
+            summary: N+1 patterns in two list endpoints.
+          - title: Dependencies
+            summary: Requirements pinned with one stale minor dependency.
+          - title: Risks
+            summary: Legacy auth module and untested migration path.
+          - title: Recommended Actions
+            summary: Prioritize ORM review, auth hardening, and docs refresh.
+        confidence: medium
+        recommendations:
+          - django-orm-expert
+          - documentation-specialist
+
+  - id: code-reviewer-pass
+    agent_id: code-reviewer
+    handoff:
+      handoff_version: 1
+      contract_id: code-review-v1
+      status: completed
+      summary: Review completed for bounded auth middleware change.
+      artifact_paths: []
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        grades:
+          - maintainability:B
+        severities:
+          - minor
+        positives:
+          - Clear test coverage for failure paths
+        findings:
+          - summary: Missing docstring on public helper
+            evidence: src/auth/helpers.py:42
+        checklist:
+          - Add docstring before merge
+        disposition: PASS
+
+  - id: documentation-changelog
+    agent_id: documentation-specialist
+    handoff:
+      handoff_version: 1
+      contract_id: documentation-changelog-v1
+      status: completed
+      summary: Updated onboarding docs for new auth flow.
+      artifact_paths:
+        - docs/en/onboarding.md
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        artifacts:
+          - docs/en/onboarding.md
+        summaries:
+          - Added auth setup steps and troubleshooting notes
+
+  - id: performance-report
+    agent_id: performance-optimizer
+    handoff:
+      handoff_version: 1
+      contract_id: performance-report-v1
+      status: completed
+      summary: Baseline and post-change comparison for checkout latency.
+      artifact_paths:
+        - docs/performance/checkout-latency.md
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        baseline: P95 checkout latency 820ms on staging
+        bottleneck: Sequential inventory lookups in checkout service
+        before_after_delta: P95 improved from 820ms to 410ms after batching lookups
+        recommendations:
+          - Add cache for hot SKU lookups
+          - Schedule destructive load test only with explicit approval
