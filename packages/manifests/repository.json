@@ -1,0 +1,17 @@
+{
+  "adaptation_version": "0.1.0.dev1",
+  "complete": false,
+  "files": [
+    {
+      "path": ".github/copilot-instructions.md",
+      "sha256": "6679c7d3b8df51dcef083a2ab729c56f0d19dfd8f49d7277c6debd7e699d9570",
+      "size": 1579
+    }
+  ],
+  "license_spdx": "MIT",
+  "package_id": "repository",
+  "schema_version": 1,
+  "source_attribution": "Copyright (c) 2024 Awesome Claude Agents Contributors",
+  "upstream_commit": "2050f3c60fcfea497f7b6b3ec6566cc316367a7e",
+  "upstream_repository": "https://github.com/vijaythecoder/awesome-claude-agents.git"
+}

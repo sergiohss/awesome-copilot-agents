@@ -1,0 +1,11 @@
+{
+  "adaptation_version": "0.1.0.dev1",
+  "complete": false,
+  "files": [],
+  "license_spdx": "MIT",
+  "package_id": "user-cli",
+  "schema_version": 1,
+  "source_attribution": "Copyright (c) 2024 Awesome Claude Agents Contributors",
+  "upstream_commit": "2050f3c60fcfea497f7b6b3ec6566cc316367a7e",
+  "upstream_repository": "https://github.com/vijaythecoder/awesome-claude-agents.git"
+}
