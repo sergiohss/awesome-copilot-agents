@@ -83,9 +83,34 @@
       "size": 4593
     },
     {
+      "path": ".copilot/agents/python-devops-cicd-expert.agent.md",
+      "sha256": "47dfe4f696bd638e3a1772505cc86cb66c3ba94c20a29a0d7efbfa650249a429",
+      "size": 5252
+    },
+    {
       "path": ".copilot/agents/python-expert.agent.md",
       "sha256": "5db3d08d970739b52d464c959430b21f1b5c6e9747b5028b95982e2cf3ec4cb9",
       "size": 5121
+    },
+    {
+      "path": ".copilot/agents/python-performance-expert.agent.md",
+      "sha256": "c9d53a06473ef34c74b6f9d2a31d978fcc98863c5f4eaa9044d396b8d18d5bef",
+      "size": 4763
+    },
+    {
+      "path": ".copilot/agents/python-security-expert.agent.md",
+      "sha256": "8420cdf39a7a5c589bf26113f65a086923c0eedb88d0728e0255435cc2d0648b",
+      "size": 4682
+    },
+    {
+      "path": ".copilot/agents/python-testing-expert.agent.md",
+      "sha256": "711423818e702d23b3f14705ac63a97c5a7c7d3f18d344c1f4983f2d4df4c179",
+      "size": 4677
+    },
+    {
+      "path": ".copilot/agents/python-web-scraping-expert.agent.md",
+      "sha256": "cbf74caa26089926f4980e9993e106bb4c016cb772252d2733bbec998becc3d9",
+      "size": 5099
     },
     {
       "path": ".copilot/agents/rails-activerecord-expert.agent.md",

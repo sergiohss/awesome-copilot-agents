@@ -447,3 +447,85 @@ agents:
       - src/fragments/approval-explicit-before-external-side-effect.md
       - src/fragments/handoff-v1.md
       - src/fragments/surface-fallback.md
+
+  - id: python-devops-cicd-expert
+    description: Python CI/CD, containers, and IaC specialist for rollout and rollback planning. Returns python-deployment-delivery-v1 with pipeline, deployment, rollback, credentials gates, and files after explicit deploy approval.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-X
+    risk_gates: [deployment, credentials, destructive-infrastructure]
+    surfaces: [H]
+    contract_id: python-deployment-delivery-v1
+    procedure_ids: [PROC-07, PROC-09, PROC-17]
+    profile: src/profiles/python-devops-cicd-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/approval-explicit-before-external-side-effect.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: python-performance-expert
+    description: Python runtime performance specialist with profiler evidence and before/after regression disposition. Returns python-performance-report-v1 with workload, profiler evidence, before/after, and regression disposition.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H]
+    contract_id: python-performance-report-v1
+    procedure_ids: [PROC-11]
+    profile: src/profiles/python-performance-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: python-security-expert
+    description: Read-only Python security assessor. Returns python-security-assessment-v1 with scope, assets, threats, severity, evidence, controls, remediation guidance, verification, and PASS or BLOCK disposition without fixing code in the same assignment.
+    tools: [read, search, execute]
+    tool_policy: T-RX
+    approval_policy: AP-R
+    risk_gates: [credential-bearing-scans]
+    surfaces: [H]
+    contract_id: python-security-assessment-v1
+    procedure_ids: [PROC-12, PROC-16]
+    profile: src/profiles/python-security-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-review-only.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: python-testing-expert
+    description: Python testing strategist for layers, fixtures, flakiness, property, and mutation quality gates. Returns python-testing-delivery-v1 with risk map, layers, fixtures, files, commands/evidence, coverage/mutation, and gaps.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H]
+    contract_id: python-testing-delivery-v1
+    procedure_ids: [PROC-15]
+    profile: src/profiles/python-testing-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: python-web-scraping-expert
+    description: Authorized Python data acquisition specialist preferring official APIs and respectful rate controls. Returns python-acquisition-report-v1 with authorization, source/API preference, robots/terms/rate controls, schema, validation, and lineage.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-X
+    risk_gates: [authorization, credentials, acquisition]
+    surfaces: [D, V]
+    contract_id: python-acquisition-report-v1
+    procedure_ids: [PROC-19]
+    profile: src/profiles/python-web-scraping-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/approval-explicit-before-external-side-effect.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md

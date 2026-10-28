@@ -150,6 +150,11 @@ def test_repository_catalog_has_orchestrator_core_and_universal_agents():
         "fastapi-expert",
         "django-expert",
         "ml-data-expert",
+        "python-devops-cicd-expert",
+        "python-performance-expert",
+        "python-security-expert",
+        "python-testing-expert",
+        "python-web-scraping-expert",
     }
     assert len(catalog.procedures) == 21
     assert [procedure.id for procedure in catalog.procedures] == [

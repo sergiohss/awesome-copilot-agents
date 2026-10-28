@@ -66,7 +66,7 @@ FILENAME_ERA_FORBIDDEN_PUBLIC_IDS = frozenset(
 )
 
 EXPECTED_PYTHON_APPLICATION_IDS = {row[0] for row in PYTHON_APPLICATION}
-EXPECTED_PROFILE_COUNT = 28
+EXPECTED_PROFILE_COUNT = 33
 
 
 @pytest.mark.parametrize("row", PYTHON_APPLICATION, ids=[row[0] for row in PYTHON_APPLICATION])
@@ -142,7 +142,7 @@ def test_python_application_handoff_fixtures_validate():
         validate_handoff(entry["agent_id"], entry["handoff"], catalog)
 
 
-def test_twenty_eight_profiles_are_generated():
+def test_thirty_three_profiles_include_python_application_agents():
     outputs = build_outputs(PROJECT_ROOT)
     generated = {
         path.name.removesuffix(".agent.md")

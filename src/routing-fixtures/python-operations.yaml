@@ -1,0 +1,194 @@
+fixtures:
+  - id: python-cicd-rollout-manual
+    kind: routing
+    request: Design GitHub Actions, container build, and staged production rollout with rollback for a Python service.
+    expected_agent_id: python-devops-cicd-expert
+    excluded_alternatives:
+      - python-expert
+      - backend-developer
+    approval_policy: AP-X
+    contract_id: python-deployment-delivery-v1
+    surface_mode: ide-subagent
+    expected_status: needs-approval
+    manual_selection: true
+
+  - id: python-runtime-profiling
+    kind: routing
+    request: Profile asyncio worker CPU and memory regressions with before/after evidence and disposition.
+    expected_agent_id: python-performance-expert
+    excluded_alternatives:
+      - performance-optimizer
+      - python-expert
+    approval_policy: AP-B
+    contract_id: python-performance-report-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+    manual_selection: false
+
+  - id: python-app-security-assessment
+    kind: routing
+    request: Read-only Python application security assessment with dependency and secret-scan evidence.
+    expected_agent_id: python-security-expert
+    excluded_alternatives:
+      - code-reviewer
+      - python-expert
+    approval_policy: AP-R
+    contract_id: python-security-assessment-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+    manual_selection: false
+
+  - id: pytest-mutation-strategy
+    kind: routing
+    request: Design pytest layers, fixtures, mutation testing, and flakiness controls for a legacy Python service.
+    expected_agent_id: python-testing-expert
+    excluded_alternatives:
+      - python-expert
+      - backend-developer
+    approval_policy: AP-B
+    contract_id: python-testing-delivery-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+    manual_selection: false
+
+  - id: authorized-data-acquisition-manual
+    kind: routing
+    request: Ingest partner catalog JSON via documented API with written authorization on file.
+    expected_agent_id: python-web-scraping-expert
+    excluded_alternatives:
+      - python-expert
+      - backend-developer
+    approval_policy: AP-X
+    contract_id: python-acquisition-report-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+    manual_selection: true
+
+  - id: missing-acquisition-authorization
+    kind: routing
+    request: Scrape a competitor storefront nightly without providing authorization.
+    expected_agent_id: python-web-scraping-expert
+    excluded_alternatives: []
+    approval_policy: AP-X
+    contract_id: python-acquisition-report-v1
+    surface_mode: ide-subagent
+    expected_status: needs-approval
+    manual_selection: true
+
+  - id: python-deployment-delivery
+    agent_id: python-devops-cicd-expert
+    handoff:
+      handoff_version: 1
+      contract_id: python-deployment-delivery-v1
+      status: completed
+      summary: CI pipeline and staged rollout with rollback hooks for billing API.
+      artifact_paths:
+        - .github/workflows/deploy.yml
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        pipeline: GitHub Actions build, test, and image publish on main
+        deployment: Blue/green ECS service update with health checks
+        rollback: Previous task definition retained for one-click revert
+        credentials_gates: Secrets referenced from vault; deploy requires AP-X approval
+        files:
+          - .github/workflows/deploy.yml
+
+  - id: python-performance-report
+    agent_id: python-performance-expert
+    handoff:
+      handoff_version: 1
+      contract_id: python-performance-report-v1
+      status: completed
+      summary: Profiled asyncio worker hotspots with measured improvement.
+      artifact_paths:
+        - reports/profile.txt
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        workload: Batch invoice reconciliation under 10k records
+        profiler_evidence: py-spy and tracemalloc snapshots attached in reports/profile.txt
+        before_after: p95 latency reduced from 820ms to 410ms after batching DB writes
+        regression_disposition: PASS with follow-up load test recommendation
+
+  - id: python-security-assessment
+    agent_id: python-security-expert
+    handoff:
+      handoff_version: 1
+      contract_id: python-security-assessment-v1
+      status: completed
+      summary: Read-only assessment of auth and dependency risks.
+      artifact_paths:
+        - reports/security-assessment.md
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        scope: Billing API service and worker processes
+        assets:
+          - app/auth/jwt.py
+          - pyproject.toml
+        threats:
+          - Weak JWT verification settings
+          - Outdated cryptography dependency
+        severity: medium
+        evidence: Static review plus pip-audit output in reports/security-assessment.md
+        controls:
+          - Enable strict audience validation
+          - Pin cryptography to patched release
+        remediation: Recommended fixes documented; no code changes applied in this assignment
+        verification: Re-run pip-audit and auth integration tests after remediation slice
+        disposition: BLOCK
+
+  - id: python-testing-delivery
+    agent_id: python-testing-expert
+    handoff:
+      handoff_version: 1
+      contract_id: python-testing-delivery-v1
+      status: completed
+      summary: Pytest strategy with mutation gate and flake controls.
+      artifact_paths:
+        - tests/conftest.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        risk_map: Payment reconciliation and webhook retries marked high risk
+        layers:
+          - unit
+          - integration
+          - contract
+        fixtures: Shared database and HTTP client fixtures in tests/conftest.py
+        files:
+          - tests/conftest.py
+        commands_evidence: pytest -q and mutmut run summary captured locally
+        coverage_mutation: Line coverage 82 percent with mutation score 71 percent on billing module
+        gaps:
+          - Add property-based tests for retry backoff
+
+  - id: python-acquisition-report
+    agent_id: python-web-scraping-expert
+    handoff:
+      handoff_version: 1
+      contract_id: python-acquisition-report-v1
+      status: completed
+      summary: Authorized partner catalog ingestion via documented API.
+      artifact_paths:
+        - ingestion/partner_catalog.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        authorization: Written partner API agreement referenced in docs/legal/partner-api.pdf
+        source_api_preference: Official REST catalog endpoint with pagination tokens
+        robots_terms_rate_controls: Terms allow hourly sync; client enforces 1 req/s with backoff
+        schema: Pydantic models for SKU, price, and availability fields
+        validation: Rejects partial records and logs validation failures
+        lineage: Source timestamp and request id stored on each imported row

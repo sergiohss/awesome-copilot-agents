@@ -72,7 +72,7 @@ VUE_STATE_RESULT_FIELDS = (
     "files",
 )
 
-EXPECTED_PROFILE_COUNT = 28
+EXPECTED_PROFILE_COUNT = 33
 
 
 @pytest.mark.parametrize("row", FRONTEND_FRAMEWORK, ids=[row[0] for row in FRONTEND_FRAMEWORK])
@@ -156,7 +156,7 @@ def test_frontend_framework_handoff_fixtures_validate():
         validate_handoff(entry["agent_id"], entry["handoff"], catalog)
 
 
-def test_twenty_eight_profiles_are_generated():
+def test_thirty_three_profiles_include_frontend_agents():
     outputs = build_outputs(PROJECT_ROOT)
     generated = {
         path.name.removesuffix(".agent.md")
