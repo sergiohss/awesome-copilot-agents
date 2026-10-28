@@ -1,0 +1,12 @@
+{
+  "surface": "vscode",
+  "platform_version": "pinned-2026-10-28",
+  "package_digest": "63628a467c6d04bb32dfe353b4d1c72397779789cda6f33bd740f82888e9582e",
+  "selected_agent": "project-analyst",
+  "fixture": "ide.yaml",
+  "observed_contract_id": "stack-analysis-v1",
+  "observed_status": "passed",
+  "artifacts": [],
+  "disposition": "manual",
+  "observed_at": "2026-10-28T22:31:34+00:00"
+}
