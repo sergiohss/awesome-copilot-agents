@@ -296,6 +296,24 @@ def build_outputs(
     return result.outputs
 
 
+def _validate_owned_ancestors(root: Path) -> None:
+    if root.is_symlink():
+        raise ValidationError(f"owned target ancestor is a symbolic link: {root}")
+    checked: set[Path] = set()
+    for relative in _OWNED_ROOTS:
+        ancestor = root
+        for part in relative.parts[:-1]:
+            ancestor /= part
+            if ancestor in checked:
+                continue
+            checked.add(ancestor)
+            if ancestor.is_symlink():
+                display = ancestor.relative_to(root).as_posix()
+                raise ValidationError(
+                    f"owned target ancestor is a symbolic link: {display}"
+                )
+
+
 def _existing_owned_files(root: Path) -> set[PurePosixPath]:
     files: set[PurePosixPath] = set()
     for relative in _OWNED_ROOTS:
@@ -420,6 +438,7 @@ def generate(
     require_complete: bool = False,
 ) -> GenerationReport:
     """Build and atomically replace every owned output root, or report drift."""
+    _validate_owned_ancestors(root)
     result = _build(root, require_complete=require_complete)
     _emit_warnings(result.warnings)
     changed_paths = _changed_paths(root, result.outputs)

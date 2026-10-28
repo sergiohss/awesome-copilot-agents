@@ -1,14 +1,18 @@
 from __future__ import annotations
 
+from copy import deepcopy
+import hashlib
 import importlib
 import json
 import os
+import shutil
 from pathlib import Path, PurePosixPath
 import unicodedata
 
 import pytest
 import yaml
 
+from aca_tools.cli import main as cli_main
 from aca_tools.errors import ValidationError
 from aca_tools.generate import GenerationReport, build_outputs, generate
 from aca_tools.loaders import load_catalog
@@ -21,6 +25,24 @@ MANIFEST_PATHS = {
     PurePosixPath("packages/manifests/repository-portable.json"),
     PurePosixPath("packages/manifests/user-cli.json"),
     PurePosixPath("packages/manifests/user-vscode.json"),
+}
+PACKAGE_ROOTS = {
+    PurePosixPath("packages/manifests/repository.json"): (
+        "repository",
+        PurePosixPath("."),
+    ),
+    PurePosixPath("packages/manifests/repository-portable.json"): (
+        "repository-portable",
+        PurePosixPath("packages/repository/portable"),
+    ),
+    PurePosixPath("packages/manifests/user-cli.json"): (
+        "user-cli",
+        PurePosixPath("packages/user/cli"),
+    ),
+    PurePosixPath("packages/manifests/user-vscode.json"): (
+        "user-vscode",
+        PurePosixPath("packages/user/vscode"),
+    ),
 }
 
 
@@ -42,6 +64,75 @@ def _owned_file_snapshot(root: Path) -> dict[PurePosixPath, bytes]:
             for path in sorted(item for item in top.rglob("*") if item.is_file()):
                 files[PurePosixPath(path.relative_to(root).as_posix())] = path.read_bytes()
     return files
+
+
+def _owned_set_snapshot(
+    root: Path,
+) -> dict[PurePosixPath, tuple[str, bytes]]:
+    entries: dict[PurePosixPath, tuple[str, bytes]] = {}
+    for top in (root / ".github", root / "packages"):
+        if not top.exists() and not top.is_symlink():
+            continue
+        paths = (top, *sorted(top.rglob("*")))
+        for path in paths:
+            relative = PurePosixPath(path.relative_to(root).as_posix())
+            if path.is_symlink():
+                entries[relative] = ("symlink", os.readlink(path).encode())
+            elif path.is_file():
+                entries[relative] = ("file", path.read_bytes())
+            elif path.is_dir():
+                entries[relative] = ("directory", b"")
+    return entries
+
+
+def _make_complete_release_project(minimal_project) -> None:
+    agents_path = minimal_project.root / "src/catalog/agents.yaml"
+    agents_document = yaml.safe_load(agents_path.read_text(encoding="utf-8"))
+    template = agents_document["agents"][0]
+    profiles = minimal_project.root / "src/profiles"
+    agents = []
+    for index in range(33):
+        agent_id = f"release-agent-{index:02d}"
+        profile = profiles / f"{agent_id}.md"
+        profile.write_text(f"Release profile {index}.\n", encoding="utf-8")
+        agent = deepcopy(template)
+        agent.update(
+            {
+                "id": agent_id,
+                "description": f"Release agent {index}.",
+                "procedure_ids": [f"PROC-{index % 21:02d}"],
+                "profile": f"src/profiles/{agent_id}.md",
+            }
+        )
+        agents.append(agent)
+    agents_path.write_text(
+        yaml.safe_dump({"agents": agents}, sort_keys=False),
+        encoding="utf-8",
+    )
+
+    procedures = []
+    skills_root = minimal_project.root / "src/skills"
+    for index in range(21):
+        procedure_id = f"PROC-{index:02d}"
+        skill_name = f"aca-release-skill-{index:02d}"
+        procedures.append(
+            {
+                "id": procedure_id,
+                "skill_name": skill_name,
+                "contract": f"Release procedure {index}.",
+            }
+        )
+        skill = skills_root / skill_name
+        skill.mkdir(parents=True)
+        (skill / "SKILL.md").write_text(
+            f"# Release skill {index}\n",
+            encoding="utf-8",
+        )
+    procedures_path = minimal_project.root / "src/catalog/procedures.yaml"
+    procedures_path.write_text(
+        yaml.safe_dump({"procedures": procedures}, sort_keys=False),
+        encoding="utf-8",
+    )
 
 
 def test_render_emits_exact_portable_frontmatter(minimal_project):
@@ -130,6 +221,66 @@ def test_release_mode_rejects_incomplete_catalog(minimal_project):
     assert minimal_project.output.read_bytes() == existing
 
 
+def test_cli_check_forwards_flag_and_preserves_complete_owned_set(
+    minimal_project,
+    capsys,
+):
+    generate(minimal_project.root)
+    minimal_project.profile.write_text("Changed canonical body.\n", encoding="utf-8")
+    stale = minimal_project.root / ".github/skills/stale.txt"
+    stale.write_bytes(b"stale generated content\n")
+    before = _owned_set_snapshot(minimal_project.root)
+
+    exit_code = cli_main(
+        ["--check", "--root", str(minimal_project.root)],
+    )
+
+    captured = capsys.readouterr()
+    assert exit_code == 1
+    assert "changed paths:" in captured.out
+    assert "complete: false" in captured.out
+    assert captured.err == ""
+    assert _owned_set_snapshot(minimal_project.root) == before
+
+
+def test_cli_release_rejects_incomplete_catalog_without_mutation(
+    minimal_project,
+    capsys,
+):
+    before = _owned_set_snapshot(minimal_project.root)
+
+    exit_code = cli_main(
+        ["--release", "--root", str(minimal_project.root)],
+    )
+
+    captured = capsys.readouterr()
+    assert exit_code == 2
+    assert captured.out == ""
+    assert "release requires exactly 33 profiles" in captured.err
+    assert _owned_set_snapshot(minimal_project.root) == before
+
+
+def test_cli_release_builds_complete_33_profile_21_skill_packages(
+    minimal_project,
+    capsys,
+):
+    _make_complete_release_project(minimal_project)
+
+    exit_code = cli_main(
+        ["--release", "--root", str(minimal_project.root)],
+    )
+
+    captured = capsys.readouterr()
+    assert exit_code == 0, captured.err
+    assert "complete: true" in captured.out
+    assert captured.err == ""
+    assert len(tuple((minimal_project.root / ".github/agents").glob("*.agent.md"))) == 33
+    assert len(tuple((minimal_project.root / ".github/skills").iterdir())) == 21
+    for manifest_path in MANIFEST_PATHS:
+        manifest = json.loads((minimal_project.root / manifest_path).read_bytes())
+        assert manifest["complete"] is True
+
+
 def test_outputs_match_all_package_layouts_and_manifest_metadata(minimal_project):
     outputs = build_outputs(minimal_project.root)
     assert MANIFEST_PATHS <= set(outputs)
@@ -149,17 +300,40 @@ def test_outputs_match_all_package_layouts_and_manifest_metadata(minimal_project
     assert not any("copilot-instructions.md" in path.as_posix() for path in outputs if path.parts[:3] == ("packages", "user", "vscode"))
 
     for manifest_path in sorted(MANIFEST_PATHS):
+        package_id, package_root = PACKAGE_ROOTS[manifest_path]
+        if package_root == PurePosixPath("."):
+            package_files = {
+                path: data
+                for path, data in outputs.items()
+                if path.parts[0] == ".github"
+            }
+        else:
+            package_files = {
+                path.relative_to(package_root): data
+                for path, data in outputs.items()
+                if path.is_relative_to(package_root)
+            }
+        expected_inventory = [
+            {
+                "path": path.as_posix(),
+                "sha256": hashlib.sha256(data).hexdigest(),
+                "size": len(data),
+            }
+            for path, data in sorted(
+                package_files.items(),
+                key=lambda item: item[0].as_posix(),
+            )
+        ]
         manifest = json.loads(outputs[manifest_path])
         assert manifest["schema_version"] == 1
+        assert manifest["package_id"] == package_id
         assert manifest["adaptation_version"] == "9.8.7"
         assert manifest["complete"] is False
         assert manifest["upstream_repository"] == "https://example.invalid/upstream.git"
         assert manifest["upstream_commit"] == "0123456789abcdef0123456789abcdef01234567"
         assert manifest["license_spdx"] == "MIT"
         assert manifest["source_attribution"] == "Copyright Example Contributors"
-        assert [entry["path"] for entry in manifest["files"]] == sorted(
-            entry["path"] for entry in manifest["files"]
-        )
+        assert manifest["files"] == expected_inventory
         assert outputs[manifest_path].endswith(b"\n")
 
 
@@ -227,3 +401,21 @@ def test_generation_never_replaces_workflows(minimal_project):
     workflow.write_bytes(b"name: existing\n")
     generate(minimal_project.root)
     assert workflow.read_bytes() == b"name: existing\n"
+
+
+def test_generation_rejects_symlinked_owned_ancestor_without_external_writes(
+    minimal_project,
+):
+    shutil.rmtree(minimal_project.root / ".github")
+    external = minimal_project.root.parent / f"{minimal_project.root.name}-external"
+    sentinel = external / "agents/project-analyst.agent.md"
+    sentinel.parent.mkdir(parents=True)
+    sentinel.write_bytes(b"external sentinel\n")
+    (minimal_project.root / ".github").symlink_to(external, target_is_directory=True)
+
+    with pytest.raises(ValidationError, match=r"symbolic link.*\.github"):
+        generate(minimal_project.root)
+
+    assert sentinel.read_bytes() == b"external sentinel\n"
+    assert not (minimal_project.root / "packages").exists()
+    assert not tuple(minimal_project.root.glob(".aca-generate-*"))
