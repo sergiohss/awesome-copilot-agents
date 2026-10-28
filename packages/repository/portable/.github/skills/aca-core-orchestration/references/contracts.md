@@ -1,0 +1,35 @@
+# Primary contracts
+
+- `api-design-report-v1`
+- `backend-implementation-v1`
+- `code-review-v1`
+- `codebase-assessment-v1`
+- `component-delivery-v1`
+- `django-api-implementation-v1`
+- `django-backend-implementation-v1`
+- `django-fullstack-implementation-v1`
+- `django-orm-optimization-v1`
+- `documentation-changelog-v1`
+- `eloquent-work-summary-v1`
+- `fastapi-implementation-v1`
+- `frontend-implementation-v1`
+- `laravel-implementation-v1`
+- `ml-data-implementation-v1`
+- `nextjs-implementation-v1`
+- `nuxt-implementation-v1`
+- `performance-report-v1`
+- `python-acquisition-report-v1`
+- `python-deployment-delivery-v1`
+- `python-implementation-v1`
+- `python-performance-report-v1`
+- `python-security-assessment-v1`
+- `python-testing-delivery-v1`
+- `rails-activerecord-optimization-v1`
+- `rails-api-implementation-v1`
+- `rails-backend-implementation-v1`
+- `react-component-delivery-v1`
+- `route-plan-v1`
+- `stack-analysis-v1`
+- `team-configuration-v1`
+- `vue-implementation-v1`
+- `vue-state-delivery-v1`

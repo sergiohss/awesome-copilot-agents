@@ -75,3 +75,22 @@ def test_acquisition_profile_refuses_unauthorized_work_without_bypass_lexicon():
     assert "authorization" in text
     for phrase in FORBIDDEN_BYPASS_PHRASES:
         assert phrase not in text
+
+
+def test_authorized_scraping_skill_requires_authorization_and_refuses_bypass():
+    skill = PROJECT_ROOT / "src/skills/aca-authorized-scraping-pipeline/SKILL.md"
+    safety = PROJECT_ROOT / "src/skills/aca-authorized-scraping-pipeline/references/safety.md"
+    combined = (skill.read_text(encoding="utf-8") + safety.read_text(encoding="utf-8")).lower()
+    assert "authorization" in combined
+    assert "prerequisite" in combined or "require" in combined
+    for phrase in FORBIDDEN_BYPASS_PHRASES:
+        assert phrase not in combined
+
+
+def test_bounded_instruction_skill_limits_generated_block_and_requires_ap_x():
+    text = (
+        PROJECT_ROOT / "src/skills/aca-bounded-instruction-update/SKILL.md"
+    ).read_text(encoding="utf-8").lower()
+    assert "generated block" in text
+    assert "ap-x" in text
+    assert "preview" in text
