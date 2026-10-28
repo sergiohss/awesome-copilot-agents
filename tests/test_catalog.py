@@ -146,6 +146,10 @@ def test_repository_catalog_has_orchestrator_core_and_universal_agents():
         "vue-component-architect",
         "vue-nuxt-expert",
         "vue-state-manager",
+        "python-expert",
+        "fastapi-expert",
+        "django-expert",
+        "ml-data-expert",
     }
     assert len(catalog.procedures) == 21
     assert [procedure.id for procedure in catalog.procedures] == [

@@ -382,3 +382,68 @@ agents:
       - src/fragments/approval-bounded-request-is-authorization.md
       - src/fragments/handoff-v1.md
       - src/fragments/surface-fallback.md
+
+  - id: python-expert
+    description: Python language and general application specialist when no narrower FastAPI, Django full-stack, or ML/data owner applies. Returns python-implementation-v1 with components, features, integration, dependencies, next steps, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: python-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09]
+    profile: src/profiles/python-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: fastapi-expert
+    description: FastAPI and Pydantic async API specialist. Returns fastapi-implementation-v1 with APIs, schemas/auth, architecture, performance/security, OpenAPI, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: fastapi-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-08, PROC-09]
+    profile: src/profiles/fastapi-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: django-expert
+    description: Cross-cutting Django full-stack integrator for templates, admin, DRF, Celery, and project architecture. Returns django-fullstack-implementation-v1 with apps/models/views, architecture, UI/admin, APIs/jobs, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: []
+    surfaces: [H, D]
+    contract_id: django-fullstack-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09]
+    profile: src/profiles/django-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md
+
+  - id: ml-data-expert
+    description: ML and data lifecycle specialist for reproducible pipelines, training, evaluation, serving hooks, and visualization. Returns ml-data-implementation-v1 with problem/model/metrics, pipeline, training, production, visualization, and files.
+    tools: [read, search, edit, execute]
+    tool_policy: T-W
+    approval_policy: AP-B
+    risk_gates: [external-model-or-data-side-effect]
+    surfaces: [H, D]
+    contract_id: ml-data-implementation-v1
+    procedure_ids: [PROC-06, PROC-07, PROC-09, PROC-18]
+    profile: src/profiles/ml-data-expert.md
+    fragments:
+      - src/fragments/ins-core.md
+      - src/fragments/approval-bounded-request-is-authorization.md
+      - src/fragments/approval-explicit-before-external-side-effect.md
+      - src/fragments/handoff-v1.md
+      - src/fragments/surface-fallback.md

@@ -1,0 +1,152 @@
+fixtures:
+  - id: fastapi-async-pydantic-api
+    kind: routing
+    request: Implement async FastAPI routers with Pydantic v2 models, OAuth2 dependencies, and OpenAPI tags for billing.
+    expected_agent_id: fastapi-expert
+    excluded_alternatives:
+      - python-expert
+      - backend-developer
+      - django-expert
+    approval_policy: AP-B
+    contract_id: fastapi-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: django-fullstack-admin-celery
+    kind: routing
+    request: Build Django admin customization, templates, DRF serializers, and Celery tasks for subscription renewals.
+    expected_agent_id: django-expert
+    excluded_alternatives:
+      - django-backend-expert
+      - django-api-developer
+      - python-expert
+    approval_policy: AP-B
+    contract_id: django-fullstack-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: general-python-packaging-cli
+    kind: routing
+    request: Add a typed Python CLI with hatchling packaging, ruff/mypy config, and asyncio HTTP client utilities.
+    expected_agent_id: python-expert
+    excluded_alternatives:
+      - fastapi-expert
+      - ml-data-expert
+    approval_policy: AP-B
+    contract_id: python-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: ml-training-serving-pipeline
+    kind: routing
+    request: Create reproducible training, evaluation, and batch scoring pipeline with experiment tracking hooks.
+    expected_agent_id: ml-data-expert
+    excluded_alternatives:
+      - python-expert
+      - fastapi-expert
+    approval_policy: AP-B
+    contract_id: ml-data-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: completed
+
+  - id: ml-external-model-registry-pull
+    kind: routing
+    request: Download a production foundation model from an external registry and wire it into the serving stack.
+    expected_agent_id: ml-data-expert
+    excluded_alternatives: []
+    approval_policy: AP-B
+    contract_id: ml-data-implementation-v1
+    surface_mode: ide-subagent
+    expected_status: needs-approval
+
+  - id: python-implementation-delivery
+    agent_id: python-expert
+    handoff:
+      handoff_version: 1
+      contract_id: python-implementation-v1
+      status: completed
+      summary: Typed CLI and packaging updates for inventory sync utility.
+      artifact_paths:
+        - src/inventory_sync/cli.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        components:
+          - inventory_sync.cli
+          - inventory_sync.client
+        features: Async fetch with retry backoff and structured logging
+        integration: Reads existing settings module and exports metrics hook
+        dependencies: Added httpx pin aligned with pyproject constraints
+        next_steps:
+          - Add pytest coverage for retry edge cases
+        files:
+          - src/inventory_sync/cli.py
+
+  - id: fastapi-implementation-delivery
+    agent_id: fastapi-expert
+    handoff:
+      handoff_version: 1
+      contract_id: fastapi-implementation-v1
+      status: completed
+      summary: FastAPI billing routers with OAuth2 dependency and OpenAPI tags.
+      artifact_paths:
+        - app/api/routes/billing.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        apis:
+          - GET /billing/invoices
+          - POST /billing/invoices
+        schemas_auth: Pydantic InvoiceCreate/InvoiceRead models with OAuth2 bearer dependency
+        architecture: APIRouter mounted under /billing with shared DB session dependency
+        performance_security: Pagination defaults and rate-limit middleware hook documented
+        openapi: Tag billing with request/response examples for invoice create
+        files:
+          - app/api/routes/billing.py
+
+  - id: django-fullstack-delivery
+    agent_id: django-expert
+    handoff:
+      handoff_version: 1
+      contract_id: django-fullstack-implementation-v1
+      status: completed
+      summary: Django subscription renewal admin, templates, DRF, and Celery tasks.
+      artifact_paths:
+        - subscriptions/admin.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        apps_models_views: subscriptions app models Renewal and admin list filters
+        architecture: Class-based views for staff dashboard plus shared service layer
+        ui_admin: Custom admin actions to trigger renewal previews
+        apis_jobs: DRF renewal endpoint and Celery beat task for nightly renewals
+        files:
+          - subscriptions/admin.py
+
+  - id: ml-data-implementation-delivery
+    agent_id: ml-data-expert
+    handoff:
+      handoff_version: 1
+      contract_id: ml-data-implementation-v1
+      status: completed
+      summary: Reproducible churn training pipeline with evaluation notebook export.
+      artifact_paths:
+        - ml/pipelines/churn_train.py
+      routing:
+        recommended_next_agent: null
+        reason: null
+        prerequisites: []
+      result:
+        problem_model_metrics: Binary churn classifier with held-out AUC reported from local run
+        pipeline: Feature store extract, train/val split, and batch scoring entrypoint
+        training: Seed-pinned sklearn pipeline with tracked hyperparameters in config YAML
+        production: Batch scoring job stub with model artifact path and monitoring hooks
+        visualization: Confusion matrix and calibration plot exported to reports/
+        files:
+          - ml/pipelines/churn_train.py

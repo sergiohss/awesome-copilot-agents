@@ -33,6 +33,11 @@
       "size": 4626
     },
     {
+      "path": ".github/agents/django-expert.agent.md",
+      "sha256": "9d4919d6a2cb3fd73bd5044a02f0022b61b46c7a698e0b2b7d64d089e044da79",
+      "size": 4990
+    },
+    {
       "path": ".github/agents/django-orm-expert.agent.md",
       "sha256": "8f5cb886d35243edefe51fe28ea888cbabc2c7ea401c77a6365f0c8a1f1698cc",
       "size": 4569
@@ -41,6 +46,11 @@
       "path": ".github/agents/documentation-specialist.agent.md",
       "sha256": "574ff6380a6a1d20ed37ae98f23e7407b0b1adcd0485e80899d33ad680f0d3f0",
       "size": 4563
+    },
+    {
+      "path": ".github/agents/fastapi-expert.agent.md",
+      "sha256": "1d6993aa0ff391bdf91760771cfdedabeb92e9d0adb86b5487c26e891298e1ed",
+      "size": 4893
     },
     {
       "path": ".github/agents/frontend-developer.agent.md",
@@ -58,6 +68,11 @@
       "size": 4639
     },
     {
+      "path": ".github/agents/ml-data-expert.agent.md",
+      "sha256": "130cb83b50dde565f0d046f0dd27e3c30d58b1e707f94216a3185b4852237b6f",
+      "size": 5418
+    },
+    {
       "path": ".github/agents/performance-optimizer.agent.md",
       "sha256": "459bce6df0c9109a8f7cb420e1e84dfae256f091b46f86be2beef73eb68d5ac9",
       "size": 4714
@@ -66,6 +81,11 @@
       "path": ".github/agents/project-analyst.agent.md",
       "sha256": "6cae82916141db43d3670c99d5bfbab342277bb69f144d16d5e3bd87e61d2548",
       "size": 4593
+    },
+    {
+      "path": ".github/agents/python-expert.agent.md",
+      "sha256": "5db3d08d970739b52d464c959430b21f1b5c6e9747b5028b95982e2cf3ec4cb9",
+      "size": 5121
     },
     {
       "path": ".github/agents/rails-activerecord-expert.agent.md",
