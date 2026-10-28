@@ -73,6 +73,44 @@ def test_catalog_validates_cross_links(tmp_path: Path, minimal_catalog_tree):
         load_catalog(tmp_path)
 
 
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("instruction", "/tmp/python.md"),
+        ("instruction", "../python.md"),
+        ("instruction", r"src\instructions\python.md"),
+        ("instruction", "C:/src/instructions/python.md"),
+        ("apply_to", "/src/**/*.py"),
+        ("apply_to", "../**/*.py"),
+        ("apply_to", r"src\**\*.py"),
+        ("apply_to", "C:/src/**/*.py"),
+    ],
+)
+def test_catalog_rejects_nonportable_path_specific_entries(
+    tmp_path: Path, minimal_catalog_tree, field: str, value: str
+):
+    entry = {
+        "apply_to": "**/*.py",
+        "instruction": "src/instructions/python.md",
+    }
+    entry[field] = value
+    minimal_catalog_tree(tmp_path, path_specific=[entry])
+    with pytest.raises(
+        ValidationError,
+        match=rf"instructions\.path_specific\[0\]\.{field}",
+    ):
+        load_catalog(tmp_path)
+
+
+def test_catalog_accepts_portable_path_specific_entry(tmp_path: Path, minimal_catalog_tree):
+    entry = {
+        "apply_to": "**/*.py",
+        "instruction": "src/instructions/python.md",
+    }
+    minimal_catalog_tree(tmp_path, path_specific=[entry])
+    assert dict(load_catalog(tmp_path).instructions.path_specific[0]) == entry
+
+
 def test_catalog_models_are_immutable(tmp_path: Path, minimal_catalog_tree):
     minimal_catalog_tree(tmp_path)
     catalog = load_catalog(tmp_path)

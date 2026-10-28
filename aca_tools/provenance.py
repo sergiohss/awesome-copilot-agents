@@ -92,14 +92,36 @@ def _strict_posix_path(value: str, field: str) -> PurePosixPath:
     return path
 
 
+def _load_strict_json(path: Path) -> dict[str, Any]:
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as error:
+        raise ValidationError(f"{path.name}: cannot read UTF-8 JSON: {error}") from error
+
+    def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValidationError(f"{path.name}: duplicate JSON key: {key}")
+            result[key] = value
+        return result
+
+    try:
+        document = json.loads(text, object_pairs_hook=reject_duplicate_keys)
+    except ValidationError:
+        raise
+    except json.JSONDecodeError as error:
+        raise ValidationError(f"{path.name}: invalid JSON: {error}") from error
+    if not isinstance(document, dict):
+        raise ValidationError(f"{path.name}: document must be an object")
+    return document
+
+
 def load_baseline(root: Path) -> SourceBaseline:
     baseline_path = root / "provenance/source-baseline.json"
     schema_path = root / "src/schemas/source-baseline.schema.json"
-    try:
-        document = json.loads(baseline_path.read_text(encoding="utf-8"))
-        schema = json.loads(schema_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as error:
-        raise ValidationError(f"source baseline: cannot load authority: {error}") from error
+    document = _load_strict_json(baseline_path)
+    schema = _load_strict_json(schema_path)
     validator = Draft202012Validator(schema)
     errors = sorted(
         validator.iter_errors(document),

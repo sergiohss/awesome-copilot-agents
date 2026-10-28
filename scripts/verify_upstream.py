@@ -5,9 +5,10 @@ import argparse
 import csv
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import subprocess
 import sys
+import unicodedata
 from typing import Any
 
 from aca_tools.errors import ValidationError
@@ -24,6 +25,12 @@ CSV_FIELDS = (
     "identity_disposition",
     "lineage_path",
 )
+
+
+def _write_json_nfc_lf(path: Path, document: dict[str, Any]) -> None:
+    text = json.dumps(document, indent=2, ensure_ascii=False) + "\n"
+    lf_text = text.replace("\r\n", "\n").replace("\r", "\n")
+    path.write_bytes(unicodedata.normalize("NFC", lf_text).encode("utf-8"))
 
 
 def _pinned_blob(source_root: Path, baseline: SourceBaseline, path: str) -> bytes:
@@ -48,6 +55,24 @@ def _file_record(source_root: Path, baseline: SourceBaseline, path: str) -> dict
         "line_count": len(blob.decode("utf-8").splitlines()),
         "sha256": hashlib.sha256(blob).hexdigest(),
     }
+
+
+def _validate_identity_rows(
+    rows: list[dict[str, str]], expected_source_paths: set[str]
+) -> None:
+    if len(rows) != 33 or len({row["source_path"] for row in rows}) != 33:
+        raise ValidationError("agents.csv: expected 33 unique source paths")
+    if {row["source_path"] for row in rows} != expected_source_paths:
+        raise ValidationError("agents.csv: source paths differ from source baseline")
+    if len({row["canonical_id"] for row in rows}) != 33:
+        raise ValidationError("agents.csv: expected 33 unique canonical IDs")
+    for index, row in enumerate(rows, start=2):
+        expected_filename_id = PurePosixPath(row["source_path"]).stem
+        if row["source_filename_id"] != expected_filename_id:
+            raise ValidationError(
+                f"agents.csv row {index} source_filename_id: "
+                f"expected {expected_filename_id}, got {row['source_filename_id']!r}"
+            )
 
 
 def _record_baseline(source_root: Path, baseline: SourceBaseline) -> None:
@@ -79,9 +104,7 @@ def _record_baseline(source_root: Path, baseline: SourceBaseline) -> None:
             ],
         },
     }
-    (ROOT / "provenance/source-baseline.json").write_text(
-        json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
+    _write_json_nfc_lf(ROOT / "provenance/source-baseline.json", document)
 
     ledger_path = ROOT / "provenance/agents.csv"
     with ledger_path.open(newline="", encoding="utf-8") as stream:
@@ -89,14 +112,9 @@ def _record_baseline(source_root: Path, baseline: SourceBaseline) -> None:
         if tuple(reader.fieldnames or ()) != CSV_FIELDS:
             raise ValidationError("agents.csv: unexpected columns")
         rows = list(reader)
-    if len(rows) != 33 or len({row["source_path"] for row in rows}) != 33:
-        raise ValidationError("agents.csv: expected 33 unique source paths")
-    if {row["source_path"] for row in rows} != {
-        item.path.as_posix() for item in baseline.agents
-    }:
-        raise ValidationError("agents.csv: source paths differ from source baseline")
-    if len({row["canonical_id"] for row in rows}) != 33:
-        raise ValidationError("agents.csv: expected 33 unique canonical IDs")
+    _validate_identity_rows(
+        rows, {item.path.as_posix() for item in baseline.agents}
+    )
     with ledger_path.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=CSV_FIELDS, lineterminator="\n")
         writer.writeheader()

@@ -23,6 +23,7 @@ def minimal_catalog_tree() -> Callable[..., None]:
         profile: str = "src/agents/project-analyst.agent.md",
         contract_id: str = "stack-analysis-v1",
         procedure_ids: list[str] | None = None,
+        path_specific: list[dict[str, object]] | None = None,
     ) -> None:
         catalog_dir = root / "src/catalog"
         schema_dir = root / "src/schemas"
@@ -60,7 +61,7 @@ def minimal_catalog_tree() -> Callable[..., None]:
             "contracts.yaml": {"contracts": {"stack-analysis-v1": "Stack analysis result"}},
             "instructions.yaml": {
                 "repository": "src/instructions/copilot.md",
-                "path_specific": [],
+                "path_specific": path_specific if path_specific is not None else [],
             },
         }
         for name, document in files.items():

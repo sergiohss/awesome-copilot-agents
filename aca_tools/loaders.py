@@ -78,6 +78,7 @@ def _posix_relative(value: str, field: str) -> PurePosixPath:
     if (
         not value
         or "\\" in value
+        or ":" in value
         or path.is_absolute()
         or path.as_posix() != value
         or any(part in ("", ".", "..") for part in path.parts)
@@ -181,12 +182,25 @@ def load_catalog(root: Path) -> Catalog:
         )
 
     repository = _posix_relative(instructions_raw["repository"], "instructions.repository")
-    path_specific = tuple(
-        MappingProxyType(dict(entry)) for entry in instructions_raw["path_specific"]
-    )
+    path_specific: list[MappingProxyType[str, object]] = []
+    for index, entry in enumerate(instructions_raw["path_specific"]):
+        apply_to = _posix_relative(
+            entry["apply_to"], f"instructions.path_specific[{index}].apply_to"
+        )
+        instruction = _posix_relative(
+            entry["instruction"], f"instructions.path_specific[{index}].instruction"
+        )
+        path_specific.append(
+            MappingProxyType(
+                {
+                    "apply_to": apply_to.as_posix(),
+                    "instruction": instruction.as_posix(),
+                }
+            )
+        )
     return Catalog(
         agents=tuple(agents),
         procedures=tuple(ProcedureSpec(**item) for item in procedures_raw),
         contracts=MappingProxyType(dict(contracts_raw)),
-        instructions=InstructionCatalog(repository=repository, path_specific=path_specific),
+        instructions=InstructionCatalog(repository=repository, path_specific=tuple(path_specific)),
     )
