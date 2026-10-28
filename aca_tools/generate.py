@@ -318,13 +318,22 @@ def _existing_owned_files(root: Path) -> set[PurePosixPath]:
     files: set[PurePosixPath] = set()
     for relative in _OWNED_ROOTS:
         target = root / relative
-        if target.is_file() or target.is_symlink():
+        if target.is_symlink() or target.is_file():
             files.add(relative)
         elif target.is_dir():
             for path in target.rglob("*"):
-                if path.is_file() or path.is_symlink():
+                if path.is_symlink() or path.is_file():
                     files.add(PurePosixPath(path.relative_to(root).as_posix()))
     return files
+
+
+def _path_has_symlink(root: Path, relative: PurePosixPath) -> bool:
+    path = root
+    for part in relative.parts:
+        path /= part
+        if path.is_symlink():
+            return True
+    return False
 
 
 def _changed_paths(
@@ -335,6 +344,9 @@ def _changed_paths(
     changed: list[Path] = []
     for relative in sorted(existing | set(outputs), key=PurePosixPath.as_posix):
         path = root / relative
+        if _path_has_symlink(root, relative):
+            changed.append(path)
+            continue
         expected = outputs.get(relative)
         if expected is None:
             changed.append(path)

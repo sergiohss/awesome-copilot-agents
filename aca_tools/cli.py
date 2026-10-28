@@ -22,7 +22,7 @@ def main(argv: Sequence[str] | None = None, *, root: Path | None = None) -> int:
 
     try:
         report = generate(
-            arguments.root.resolve(),
+            arguments.root.absolute(),
             check=arguments.check,
             require_complete=arguments.release,
         )

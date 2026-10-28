@@ -85,6 +85,40 @@ def _owned_set_snapshot(
     return entries
 
 
+def _package_snapshots(
+    root: Path,
+) -> dict[str, dict[PurePosixPath, bytes]]:
+    package_roots = {
+        "repository": (root / ".github", PurePosixPath(".github")),
+        "repository-portable": (
+            root / "packages/repository/portable",
+            PurePosixPath("."),
+        ),
+        "user-cli": (root / "packages/user/cli", PurePosixPath(".")),
+        "user-vscode": (root / "packages/user/vscode", PurePosixPath(".")),
+    }
+    snapshots: dict[str, dict[PurePosixPath, bytes]] = {}
+    for package_id, (package_root, prefix) in package_roots.items():
+        files: dict[PurePosixPath, bytes] = {}
+        for path in sorted(item for item in package_root.rglob("*") if item.is_file()):
+            relative = PurePosixPath(path.relative_to(package_root).as_posix())
+            package_path = relative if prefix == PurePosixPath(".") else prefix / relative
+            files[package_path] = path.read_bytes()
+        snapshots[package_id] = files
+    return snapshots
+
+
+def _inventory(files: dict[PurePosixPath, bytes]) -> list[dict[str, object]]:
+    return [
+        {
+            "path": path.as_posix(),
+            "sha256": hashlib.sha256(data).hexdigest(),
+            "size": len(data),
+        }
+        for path, data in sorted(files.items(), key=lambda item: item[0].as_posix())
+    ]
+
+
 def _make_complete_release_project(minimal_project) -> None:
     agents_path = minimal_project.root / "src/catalog/agents.yaml"
     agents_document = yaml.safe_load(agents_path.read_text(encoding="utf-8"))
@@ -274,11 +308,73 @@ def test_cli_release_builds_complete_33_profile_21_skill_packages(
     assert exit_code == 0, captured.err
     assert "complete: true" in captured.out
     assert captured.err == ""
-    assert len(tuple((minimal_project.root / ".github/agents").glob("*.agent.md"))) == 33
-    assert len(tuple((minimal_project.root / ".github/skills").iterdir())) == 21
-    for manifest_path in MANIFEST_PATHS:
+
+    agent_names = {f"release-agent-{index:02d}.agent.md" for index in range(33)}
+    skill_names = {f"aca-release-skill-{index:02d}" for index in range(21)}
+    expected_paths = {
+        "repository": {
+            PurePosixPath(".github/copilot-instructions.md"),
+            *(PurePosixPath(".github/agents") / name for name in agent_names),
+            *(
+                PurePosixPath(".github/skills") / name / "SKILL.md"
+                for name in skill_names
+            ),
+        },
+        "repository-portable": {
+            PurePosixPath(".github/copilot-instructions.md"),
+            *(PurePosixPath(".github/agents") / name for name in agent_names),
+            *(
+                PurePosixPath(".github/skills") / name / "SKILL.md"
+                for name in skill_names
+            ),
+        },
+        "user-cli": {
+            *(PurePosixPath(".copilot/agents") / name for name in agent_names),
+            *(
+                PurePosixPath(".copilot/skills") / name / "SKILL.md"
+                for name in skill_names
+            ),
+        },
+        "user-vscode": {
+            *(PurePosixPath("agents") / name for name in agent_names),
+            *(PurePosixPath("skills") / name / "SKILL.md" for name in skill_names),
+        },
+    }
+    snapshots = _package_snapshots(minimal_project.root)
+    assert {
+        package_id: set(files)
+        for package_id, files in snapshots.items()
+    } == expected_paths
+    assert snapshots["repository"] == snapshots["repository-portable"]
+
+    for name in agent_names:
+        repository_data = snapshots["repository"][
+            PurePosixPath(".github/agents") / name
+        ]
+        assert snapshots["user-cli"][PurePosixPath(".copilot/agents") / name] == repository_data
+        assert snapshots["user-vscode"][PurePosixPath("agents") / name] == repository_data
+    for name in skill_names:
+        repository_data = snapshots["repository"][
+            PurePosixPath(".github/skills") / name / "SKILL.md"
+        ]
+        assert snapshots["user-cli"][
+            PurePosixPath(".copilot/skills") / name / "SKILL.md"
+        ] == repository_data
+        assert snapshots["user-vscode"][
+            PurePosixPath("skills") / name / "SKILL.md"
+        ] == repository_data
+
+    repository_instruction = minimal_project.root.joinpath(
+        "src/instructions/copilot.md"
+    ).read_bytes()
+    assert snapshots["repository"][
+        PurePosixPath(".github/copilot-instructions.md")
+    ] == repository_instruction
+
+    for manifest_path, (package_id, _) in PACKAGE_ROOTS.items():
         manifest = json.loads((minimal_project.root / manifest_path).read_bytes())
         assert manifest["complete"] is True
+        assert manifest["files"] == _inventory(snapshots[package_id])
 
 
 def test_outputs_match_all_package_layouts_and_manifest_metadata(minimal_project):
@@ -419,3 +515,71 @@ def test_generation_rejects_symlinked_owned_ancestor_without_external_writes(
     assert sentinel.read_bytes() == b"external sentinel\n"
     assert not (minimal_project.root / "packages").exists()
     assert not tuple(minimal_project.root.glob(".aca-generate-*"))
+
+
+def test_cli_rejects_symlink_root_without_mutating_target(
+    minimal_project,
+    capsys,
+):
+    lexical_root = minimal_project.root.parent / f"{minimal_project.root.name}-link"
+    lexical_root.symlink_to(minimal_project.root, target_is_directory=True)
+    external_sentinel = minimal_project.root.parent / (
+        f"{minimal_project.root.name}-external-sentinel"
+    )
+    external_sentinel.write_bytes(b"outside root\n")
+    target_before = _owned_set_snapshot(minimal_project.root)
+
+    exit_code = cli_main(["--root", str(lexical_root)])
+
+    captured = capsys.readouterr()
+    assert exit_code == 2
+    assert captured.out == ""
+    assert "symbolic link" in captured.err
+    assert _owned_set_snapshot(minimal_project.root) == target_before
+    assert external_sentinel.read_bytes() == b"outside root\n"
+    assert not (minimal_project.root / "packages").exists()
+
+
+def test_final_owned_root_symlink_is_drift_and_replaced_without_external_writes(
+    minimal_project,
+):
+    generate(minimal_project.root)
+    expected = minimal_project.output.read_bytes()
+    external = minimal_project.root.parent / f"{minimal_project.root.name}-root-link"
+    external.mkdir()
+    external_profile = external / minimal_project.output.name
+    external_profile.write_bytes(expected)
+    external_sentinel = external / "sentinel.txt"
+    external_sentinel.write_bytes(b"outside root\n")
+    shutil.rmtree(minimal_project.root / ".github/agents")
+    (minimal_project.root / ".github/agents").symlink_to(
+        external,
+        target_is_directory=True,
+    )
+
+    report = generate(minimal_project.root)
+
+    assert minimal_project.root / ".github/agents" in report.changed_paths
+    assert not (minimal_project.root / ".github/agents").is_symlink()
+    assert not minimal_project.output.is_symlink()
+    assert minimal_project.output.read_bytes() == expected
+    assert external_profile.read_bytes() == expected
+    assert external_sentinel.read_bytes() == b"outside root\n"
+
+
+def test_generated_leaf_symlink_is_drift_and_replaced_without_external_writes(
+    minimal_project,
+):
+    generate(minimal_project.root)
+    expected = minimal_project.output.read_bytes()
+    external = minimal_project.root.parent / f"{minimal_project.root.name}-leaf-link"
+    external.write_bytes(expected)
+    minimal_project.output.unlink()
+    minimal_project.output.symlink_to(external)
+
+    report = generate(minimal_project.root)
+
+    assert minimal_project.output in report.changed_paths
+    assert not minimal_project.output.is_symlink()
+    assert minimal_project.output.read_bytes() == expected
+    assert external.read_bytes() == expected
